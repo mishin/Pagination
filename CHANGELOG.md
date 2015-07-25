@@ -1,0 +1,1 @@
+CHANGELOG for 1.0.x===================All notable changes to `UCSDMath\Pagination` (bug and security fixes) willbe documented in this file.# 1.0.5 (2015-07-25) - Initial Release of `UCSDMath\Pagination` - Initial Release version starts at v1.0.5 as introduced to the framework

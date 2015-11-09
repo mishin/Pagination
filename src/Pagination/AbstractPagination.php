@@ -75,6 +75,25 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
  * @method PaginationInterface setRenderAsJson(\Closure $renderAsJson);
  * @method PaginationInterface setLimitPerPageOffset(\Closure $limitPerPageOffset);
  * @method array getLimitPerPageOffset(\Closure $overridePerPageOffset = null, $newPage = null);
+ * @method mixed getPrevUrl();
+ * @method integer getNextUrl();
+ * @method integer getNumPages();
+ * @method integer getNextPage();
+ * @method integer getPrevPage();
+ * @method integer getPageCount();
+ * @method string getUrlPattern();
+ * @method integer getTotalItems();
+ * @method integer getPageOffset();
+ * @method integer getItemsPerPage();
+ * @method integer getMaxPagesToShow();
+ * @method integer getCurrentPageNumber();
+ * @method PaginationInterface setPageCount();
+ * @method PaginationInterface setPageOffset();
+ * @method PaginationInterface setUrlPattern($urlPattern);
+ * @method PaginationInterface setTotalItems($totalItems);
+ * @method PaginationInterface setItemsPerPage($itemsPerPage);
+ * @method PaginationInterface setMaxPagesToShow($maxPagesToShow);
+ * @method PaginationInterface setCurrentPageNumber($currentPageNumber = null);
  *
  * @author Daryl Eisner <deisner@ucsd.edu>
  */
@@ -528,6 +547,280 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         $last = $first + (int) $this->itemsPerPage - 1;
 
         return ($last > (int) $this->totalItems) ? (int) $this->totalItems : $last;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Set the page offset.
+     *
+     * @return PaginationInterface
+     *
+     * @api
+     */
+    protected function setPageOffset()
+    {
+        $this->normalizePageCounts();
+        $this->setProperty('pageOffset', abs(intval($this->currentPageNumber * $this->itemsPerPage - $this->itemsPerPage)));
+
+        return $this;
+    }
+
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Normalize and check page counts.
+     *
+     * @return PaginationInterface
+     *
+     * @api
+     */
+    protected function normalizePageCounts()
+    {
+        if ($this->currentPageNumber > $this->pageCount
+            || $this->currentPageNumber < static::BASE_PAGE
+        ) {
+            $this->setProperty('currentPageNumber', static::BASE_PAGE);
+        }
+
+        if ($this->itemsPerPage < 1) {
+            $this->setProperty('itemsPerPage', static::BASE_PAGE);
+        }
+
+        return $this;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Get the page offset.
+     *
+     * @return integer
+     *
+     * @api
+     */
+    protected function getPageOffset()
+    {
+        return (int) $this->getProperty('pageOffset');
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Calculate the number of pages.
+     *
+     * @return bool
+     */
+    protected function setPageCount()
+    {
+        ((int) $this->itemsPerPage === 0)
+            ? $this->setProperty('pageCount', 0)
+            : $this->setProperty('pageCount', (int) ceil((int) $this->totalItems / (int) $this->itemsPerPage));
+
+        return $this;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPageCount()
+    {
+        return (int) $this->getProperty('pageCount');
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Determine if the given value is a valid page number.
+     *
+     * @param  integer $page  A page number.
+     *
+     * @return Boolean
+     */
+    protected function isValidPageNumber($page)
+    {
+        return $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setMaxPagesToShow($maxPagesToShow)
+    {
+        if ((int) $maxPagesToShow < 3) {
+            throw new \InvalidArgumentException('maxPagesToShow cannot be less than 3.');
+        }
+
+        $this->setProperty('maxPagesToShow', (int) $maxPagesToShow);
+
+        return $this;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMaxPagesToShow()
+    {
+        return (int) $this->getProperty('maxPagesToShow');
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCurrentPageNumber($currentPageNumber = null)
+    {
+        if (null !== $currentPageNumber) {
+            $this->setProperty('currentPageNumber', (int) $currentPageNumber);
+        }
+
+        $this->normalizePageCounts();
+
+        return $this;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCurrentPageNumber()
+    {
+        return $this->currentPageNumber > $this->pageCount ? static::BASE_PAGE : $this->currentPageNumber;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setItemsPerPage($itemsPerPage)
+    {
+        $this->setProperty('itemsPerPage', (int) $itemsPerPage);
+        $this->updateNumPages();
+
+        return $this;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemsPerPage()
+    {
+        return (int) $this->getProperty('itemsPerPage');
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTotalItems($totalItems)
+    {
+        $this->setProperty('totalItems', (int) $totalItems);
+        $this->updateNumPages();
+
+        return $this;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotalItems()
+    {
+        return (int) $this->getProperty('totalItems');
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNumPages()
+    {
+        return (int) $this->getProperty('pageCount');
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNextPage()
+    {
+        return (int) $this->currentPageNumber < $this->pageCount
+            ? (int) $this->currentPageNumber + 1
+            : null;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrevPage()
+    {
+        return (int) $this->currentPageNumber > 1
+            ? (int) $this->currentPageNumber - 1
+            : null;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNextUrl()
+    {
+        return $this->getNextPage()
+            ? $this->getPageUrl($this->getNextPage())
+            : null;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrevUrl()
+    {
+        return $this->getPrevPage()
+            ? $this->getPageUrl($this->getPrevPage())
+            : null;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUrlPattern($urlPattern)
+    {
+        $this->setProperty('urlPattern', (string) $urlPattern);
+
+        return $this;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUrlPattern()
+    {
+        return $this->getProperty('urlPattern');
     }
 
     // --------------------------------------------------------------------------

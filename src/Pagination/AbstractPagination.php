@@ -349,7 +349,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
                 $pages[] = $this->createPage($i, $i === (int) $this->currentPageNumber);
             }
         } else {
-            /** Determine the sliding range, centered around the current page */
+            /* Determine the sliding range, centered around the current page */
             $numberAdjacents = (int) floor(($this->maxPagesToShow - 3) / 2);
 
             if ((int) $this->currentPageNumber + $numberAdjacents > $this->pageCount) {
@@ -369,7 +369,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
                 $slidingEnd = $this->pageCount - 1;
             }
 
-            /** Build the list of pages */
+            /* Build the list of pages */
             $pages[] = $this->createPage(1, (int) $this->currentPageNumber === 1);
 
             if ($slidingStart > 2) {
@@ -470,7 +470,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
             $html .= "</div>\n<!-- /paging controls -->";
         }
 
-        /** comment: jQuery pagination in /sso/1/assets/js/vendor/ucsdmath-functions.min.js */
+        /* comment: jQuery pagination in /sso/1/assets/js/vendor/ucsdmath-functions.min.js */
 
         return $html;
     }
@@ -565,7 +565,6 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
 
         return $this;
     }
-
 
     // --------------------------------------------------------------------------
 

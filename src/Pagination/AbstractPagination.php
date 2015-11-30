@@ -106,7 +106,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    const VERSION = '1.4.0';
+    const VERSION = '1.5.0';
 
     // --------------------------------------------------------------------------
 

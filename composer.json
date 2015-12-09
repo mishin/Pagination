@@ -19,12 +19,14 @@
         "email": "deisner@ucsd.edu"
     },
     "require": {
-        "php": ">=5.6.10"
+        "php": ">=5.6.10",
+        "ucsdmath/functions": "1.5.x-dev"
     },
     "require-dev": {
-        "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "5.1.*",
-        "squizlabs/php_codesniffer": "2.4.*"
+        "mockery/mockery": "0.9.4",
+        "phpunit/phpunit": "5.1.2",
+        "ucsdmath/testing": "1.5.x-dev",
+        "squizlabs/php_codesniffer": "2.4.0"
     },
     "autoload": {
         "psr-4": {

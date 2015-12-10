@@ -52,11 +52,11 @@ namespace UCSDMath\Pagination;
  *    - /sso/1/personnel/edit-search/page-(:page)/show-(:rows)/(:search)/(:sort)/
  *    - /sso/1/personnel/edit-record/page-(:page)/
  *
- * Method list:
+ * Method list: (+) @api, (-) protected or private visibility.
  *
  * The notation below illustrates visibility: (+) @api, (-) protected or private.
  *
- * @method PaginationInterface __construct();
+ * (+) PaginationInterface __construct();
  *
  * @author Daryl Eisner <deisner@ucsd.edu>
  *

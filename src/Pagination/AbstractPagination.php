@@ -55,45 +55,45 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
  *    - /sso/1/personnel/edit-search/page-(:page)/show-(:rows)/(:search)/(:sort)/
  *    - /sso/1/personnel/edit-record/page-(:page)/
  *
- * Method list:
+ * Method list: (+) @api, (-) protected or private visibility.
  *
  * The notation below illustrates visibility: (+) @api, (-) protected or private.
  *
- * @method PaginationInterface __construct();
- * @method void __destruct();
- * @method string __toString();
- * @method object __call($callback, $parameters);
- * @method array renderAsArray();
- * @method string renderLargePaging();
- * @method string renderCompactPaging();
- * @method string getPageUrl($pageNumber);
- * @method boolean isValidPageNumber($page);
- * @method integer getCurrentPageLastItem();
- * @method integer getCurrentPageFirstItem();
- * @method PaginationInterface recalculate(array $settings);
- * @method array createPage($pageNumber, $isCurrentPage = false);
- * @method PaginationInterface setRenderAsJson(\Closure $renderAsJson);
- * @method PaginationInterface setLimitPerPageOffset(\Closure $limitPerPageOffset);
- * @method array getLimitPerPageOffset(\Closure $overridePerPageOffset = null, $newPage = null);
- * @method mixed getPrevUrl();
- * @method integer getNextUrl();
- * @method integer getNumPages();
- * @method integer getNextPage();
- * @method integer getPrevPage();
- * @method integer getPageCount();
- * @method string getUrlPattern();
- * @method integer getTotalItems();
- * @method integer getPageOffset();
- * @method integer getItemsPerPage();
- * @method integer getMaxPagesToShow();
- * @method integer getCurrentPageNumber();
- * @method PaginationInterface setPageCount();
- * @method PaginationInterface setPageOffset();
- * @method PaginationInterface setUrlPattern($urlPattern);
- * @method PaginationInterface setTotalItems($totalItems);
- * @method PaginationInterface setItemsPerPage($itemsPerPage);
- * @method PaginationInterface setMaxPagesToShow($maxPagesToShow);
- * @method PaginationInterface setCurrentPageNumber($currentPageNumber = null);
+ * (+) PaginationInterface __construct();
+ * (+) void __destruct();
+ * (+) string __toString();
+ * (+) object __call($callback, $parameters);
+ * (+) array renderAsArray();
+ * (+) string renderLargePaging();
+ * (+) string renderCompactPaging();
+ * (+) string getPageUrl($pageNumber);
+ * (+) boolean isValidPageNumber($page);
+ * (+) integer getCurrentPageLastItem();
+ * (+) integer getCurrentPageFirstItem();
+ * (+) PaginationInterface recalculate(array $settings);
+ * (+) array createPage($pageNumber, $isCurrentPage = false);
+ * (+) PaginationInterface setRenderAsJson(\Closure $renderAsJson);
+ * (+) PaginationInterface setLimitPerPageOffset(\Closure $limitPerPageOffset);
+ * (+) array getLimitPerPageOffset(\Closure $overridePerPageOffset = null, $newPage = null);
+ * (+) mixed getPrevUrl();
+ * (+) integer getNextUrl();
+ * (+) integer getNumPages();
+ * (+) integer getNextPage();
+ * (+) integer getPrevPage();
+ * (+) integer getPageCount();
+ * (+) string getUrlPattern();
+ * (+) integer getTotalItems();
+ * (+) integer getPageOffset();
+ * (+) integer getItemsPerPage();
+ * (+) integer getMaxPagesToShow();
+ * (+) integer getCurrentPageNumber();
+ * (+) PaginationInterface setPageCount();
+ * (+) PaginationInterface setPageOffset();
+ * (+) PaginationInterface setUrlPattern($urlPattern);
+ * (+) PaginationInterface setTotalItems($totalItems);
+ * (+) PaginationInterface setItemsPerPage($itemsPerPage);
+ * (+) PaginationInterface setMaxPagesToShow($maxPagesToShow);
+ * (+) PaginationInterface setCurrentPageNumber($currentPageNumber = null);
  *
  * @author Daryl Eisner <deisner@ucsd.edu>
  */
@@ -825,28 +825,26 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * Method implementations inserted.
+     * Method implementations inserted:
      *
-     * The notation below illustrates visibility: (+) @api, (-) protected or private.
-     *
-     * @method all();
-     * @method init();
-     * @method get($key);
-     * @method has($key);
-     * @method version();
-     * @method getClassName();
-     * @method getConst($key);
-     * @method set($key, $value);
-     * @method isString($str);
-     * @method getInstanceCount();
-     * @method getClassInterfaces();
-     * @method __call($callback, $parameters);
-     * @method getProperty($name, $key = null);
-     * @method doesFunctionExist($functionName);
-     * @method isStringKey($str, array $keys);
-     * @method throwExceptionError(array $error);
-     * @method setProperty($name, $value, $key = null);
-     * @method throwInvalidArgumentExceptionError(array $error);
+     * (+) all();
+     * (+) init();
+     * (+) get($key);
+     * (+) has($key);
+     * (+) version();
+     * (+) getClassName();
+     * (+) getConst($key);
+     * (+) set($key, $value);
+     * (+) isString($str);
+     * (+) getInstanceCount();
+     * (+) getClassInterfaces();
+     * (+) __call($callback, $parameters);
+     * (+) getProperty($name, $key = null);
+     * (+) doesFunctionExist($functionName);
+     * (+) isStringKey($str, array $keys);
+     * (+) throwExceptionError(array $error);
+     * (+) setProperty($name, $value, $key = null);
+     * (+) throwInvalidArgumentExceptionError(array $error);
      */
     use ServiceFunctions;
 }

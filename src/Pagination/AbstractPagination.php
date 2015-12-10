@@ -432,7 +432,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
             foreach ($this->renderAsArray() as $render) {
                 if ($render['pageUrl']) {
                     $html .= '    <option value="' . str_replace(['"'], ['%22'], $render['pageUrl']) . '"';
-                    $html .= $render['isCurrentPage'] ? ' selected="selected">' : '>' ;
+                    $html .= $render['isCurrentPage'] ? ' selected="selected">' : '>';
                     $html .= 'Page ' . $render['pageNumber'] . '</option>' . "\n";
 
                 } else {

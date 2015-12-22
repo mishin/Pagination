@@ -23,7 +23,7 @@ interface PaginationInterface
      */
     const BASE_PAGE = 1;
     const CHARSET = 'UTF-8';
-    const REQUIRED_PHP_VERSION = '5.6.10';
+    const REQUIRED_PHP_VERSION = '7.0.0';
     const PAGE_PLACEHOLDER   = '(:page)';
     const ROWS_PLACEHOLDER   = '(:rows)';
     const SORT_PLACEHOLDER   = '(:sort)';

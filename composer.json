@@ -1,7 +1,7 @@
 {
     "name": "ucsdmath/pagination",
     "description": "Simple pagination",
-    "keywords": ["pagination", "ucsdmath"],
+    "keywords": ["pagination", "ucsdmath", "component"],
     "homepage": "https://github.com/ucsdmath",
     "type": "library",
     "license": "MIT",

@@ -227,7 +227,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * {@inheritdoc}
      */
-    public function setLimitPerPageOffset(\Closure $limitPerPageOffset)
+    public function setLimitPerPageOffset(\Closure $limitPerPageOffset): self
     {
         $this->setProperty('limitPerPageOffset', $limitPerPageOffset);
 
@@ -239,7 +239,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * {@inheritdoc}
      */
-    public function setRenderAsJson(\Closure $renderAsJson)
+    public function setRenderAsJson(\Closure $renderAsJson): self
     {
         $this->setProperty('renderAsJson', $renderAsJson);
 
@@ -559,7 +559,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    protected function setPageOffset()
+    protected function setPageOffset(): self
     {
         $this->normalizePageCounts();
         $this->setProperty('pageOffset', abs(intval($this->currentPageNumber * $this->itemsPerPage - $this->itemsPerPage)));
@@ -576,7 +576,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    protected function normalizePageCounts()
+    protected function normalizePageCounts(): self
     {
         if ($this->currentPageNumber > $this->pageCount
             || $this->currentPageNumber < static::BASE_PAGE
@@ -612,7 +612,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @return bool
      */
-    protected function setPageCount()
+    protected function setPageCount(): self
     {
         ((int) $this->itemsPerPage === 0)
             ? $this->setProperty('pageCount', 0)
@@ -676,7 +676,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * {@inheritdoc}
      */
-    public function setCurrentPageNumber($currentPageNumber = null)
+    public function setCurrentPageNumber($currentPageNumber = null): self
     {
         if (null !== $currentPageNumber) {
             $this->setProperty('currentPageNumber', (int) $currentPageNumber);
@@ -702,7 +702,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * {@inheritdoc}
      */
-    public function setItemsPerPage($itemsPerPage)
+    public function setItemsPerPage($itemsPerPage): self
     {
         $this->setProperty('itemsPerPage', (int) $itemsPerPage);
         $this->updateNumPages();
@@ -725,7 +725,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * {@inheritdoc}
      */
-    public function setTotalItems($totalItems)
+    public function setTotalItems($totalItems): self
     {
         $this->setProperty('totalItems', (int) $totalItems);
         $this->updateNumPages();
@@ -806,7 +806,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * {@inheritdoc}
      */
-    public function setUrlPattern($urlPattern)
+    public function setUrlPattern($urlPattern): self
     {
         $this->setProperty('urlPattern', (string) $urlPattern);
 

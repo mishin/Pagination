@@ -24,5 +24,5 @@ use RuntimeException;
  */
 class CallbackNotFoundException extends RuntimeException
 {
-
+    // --------------------------------------------------------------------------
 }

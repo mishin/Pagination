@@ -976,4 +976,6 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * (+) throwInvalidArgumentExceptionError(array $error);
      */
     use ServiceFunctions;
+
+    // --------------------------------------------------------------------------
 }

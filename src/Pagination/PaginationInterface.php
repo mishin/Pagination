@@ -330,4 +330,6 @@ interface PaginationInterface
      * @api
      */
     public function getCurrentPageLastItem();
+
+    // --------------------------------------------------------------------------
 }

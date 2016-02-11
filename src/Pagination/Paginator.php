@@ -93,4 +93,6 @@ class Paginator extends AbstractPagination implements PaginationInterface
     {
         parent::__construct($settings);
     }
+
+    // --------------------------------------------------------------------------
 }

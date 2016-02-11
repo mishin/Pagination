@@ -48,25 +48,25 @@ interface PaginationInterface
      *
      * @api
      */
-    public function recalculate(array $settings);
+    public function recalculate(array $settings): PaginationInterface;
 
     // --------------------------------------------------------------------------
 
     /**
      * Get the calculated page count.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */
-    public function getPageCount();
+    public function getPageCount(): int;
 
     // --------------------------------------------------------------------------
 
     /**
      * Set the maximum pages to display.
      *
-     * @param  integer $maxPagesToShow  A number of pages to display.
+     * @param int $maxPagesToShow  A number of pages to display.
      *
      * @return PaginationInterface
      *
@@ -74,18 +74,18 @@ interface PaginationInterface
      *
      * @api
      */
-    public function setMaxPagesToShow($maxPagesToShow);
+    public function setMaxPagesToShow(int $maxPagesToShow): PaginationInterface;
 
     // --------------------------------------------------------------------------
 
     /**
      * Get the maximum pages to display.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */
-    public function getMaxPagesToShow();
+    public function getMaxPagesToShow(): int;
 
     // --------------------------------------------------------------------------
 
@@ -103,20 +103,20 @@ interface PaginationInterface
     /**
      * Set the current page number.
      *
-     * @param  integer $currentPageNumber  A current page number.
+     * @param int $currentPageNumber  A current page number.
      *
      * @return PaginationInterface
      *
      * @api
      */
-    public function setCurrentPageNumber($currentPageNumber = null);
+    public function setCurrentPageNumber($currentPageNumber = null): PaginationInterface;
 
     // --------------------------------------------------------------------------
 
     /**
      * Get the current page number.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */
@@ -127,20 +127,20 @@ interface PaginationInterface
     /**
      * Set the number of items (records) per page.
      *
-     * @param  integer $itemsPerPage  A number of items per page
+     * @param int $itemsPerPage  A number of items per page
      *
      * @return PaginationInterface
      *
      * @api
      */
-    public function setItemsPerPage($itemsPerPage);
+    public function setItemsPerPage($itemsPerPage): PaginationInterface;
 
     // --------------------------------------------------------------------------
 
     /**
      * Get the number of items (records) per page.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */
@@ -151,20 +151,20 @@ interface PaginationInterface
     /**
      * Set the total number of records in total.
      *
-     * @param  integer $totalItems  A number of total records in database
+     * @param int $totalItems  A number of total records in database
      *
      * @return PaginationInterface
      *
      * @api
      */
-    public function setTotalItems($totalItems);
+    public function setTotalItems($totalItems): PaginationInterface;
 
     // --------------------------------------------------------------------------
 
     /**
      * Get the number of items in database.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */
@@ -175,7 +175,7 @@ interface PaginationInterface
     /**
      * Get the number of pages.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */
@@ -186,13 +186,13 @@ interface PaginationInterface
     /**
      * Set the url pattern for rendering pagination (scheme).
      *
-     * @param  string $urlPattern  A base SEO url pattern
+     * @param string $urlPattern  A base SEO url pattern
      *
      * @return PaginationInterface
      *
      * @api
      */
-    public function setUrlPattern($urlPattern);
+    public function setUrlPattern($urlPattern): PaginationInterface;
 
     // --------------------------------------------------------------------------
 
@@ -210,7 +210,7 @@ interface PaginationInterface
     /**
      * Get the page url.
      *
-     * @param  integer $pageNumber  A page number for the url pattern
+     * @param int $pageNumber  A page number for the url pattern
      *
      * @return string
      *
@@ -223,7 +223,7 @@ interface PaginationInterface
     /**
      * Get the next page number.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */
@@ -234,7 +234,7 @@ interface PaginationInterface
     /**
      * Get the previous page number.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */
@@ -314,7 +314,7 @@ interface PaginationInterface
     /**
      * Get the next page number.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */
@@ -325,7 +325,7 @@ interface PaginationInterface
     /**
      * Get the last item for the current page.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */

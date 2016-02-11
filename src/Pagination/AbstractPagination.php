@@ -69,25 +69,25 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
  * (+) string renderCompactPaging();
  * (+) string getPageUrl($pageNumber);
  * (+) boolean isValidPageNumber($page);
- * (+) integer getCurrentPageLastItem();
- * (+) integer getCurrentPageFirstItem();
+ * (+) int     getCurrentPageLastItem();
+ * (+) int     getCurrentPageFirstItem();
  * (+) PaginationInterface recalculate(array $settings);
  * (+) array createPage($pageNumber, $isCurrentPage = false);
  * (+) PaginationInterface setRenderAsJson(\Closure $renderAsJson);
  * (+) PaginationInterface setLimitPerPageOffset(\Closure $limitPerPageOffset);
  * (+) array getLimitPerPageOffset(\Closure $overridePerPageOffset = null, $newPage = null);
  * (+) mixed getPrevUrl();
- * (+) integer getNextUrl();
- * (+) integer getNumPages();
- * (+) integer getNextPage();
- * (+) integer getPrevPage();
- * (+) integer getPageCount();
+ * (+) int     getNextUrl();
+ * (+) int     getNumPages();
+ * (+) int     getNextPage();
+ * (+) int     getPrevPage();
+ * (+) int     getPageCount();
  * (+) string getUrlPattern();
- * (+) integer getTotalItems();
- * (+) integer getPageOffset();
- * (+) integer getItemsPerPage();
- * (+) integer getMaxPagesToShow();
- * (+) integer getCurrentPageNumber();
+ * (+) int     getTotalItems();
+ * (+) int     getPageOffset();
+ * (+) int     getItemsPerPage();
+ * (+) int     getMaxPagesToShow();
+ * (+) int     getCurrentPageNumber();
  * (+) PaginationInterface setPageCount();
  * (+) PaginationInterface setPageOffset();
  * (+) PaginationInterface setUrlPattern($urlPattern);
@@ -114,15 +114,15 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Properties.
      *
-     * @var    integer             $pageCount            A number of pages to render (e.g., a calculation) (e.g., 780)
-     * @var    integer             $totalItems           A total number of found records in table (e.g., 8500)
-     * @var    integer             $pageOffset           A interger used to define our SQL OFFSET (e.g., 60)
+     * @var    int                 $pageCount            A number of pages to render (e.g., a calculation) (e.g., 780)
+     * @var    int                 $totalItems           A total number of found records in table (e.g., 8500)
+     * @var    int                 $pageOffset           A interger used to define our SQL OFFSET (e.g., 60)
      * @var    string              $urlPattern           A default url with placeholders (e.g., '/sso/1/news/(:page)/(:rows)/(:search)/')
      * @var    string              $sortPattern          A default sort url pattern (:sort) (e.g., 'group-lastname-firstname')
-     * @var    integer             $itemsPerPage         A display setting showing a number of records per page (e.g., 15)
-     * @var    integer             $maxPagesToShow       A maximum number of pages for the <select> menu (e.g., 10)
+     * @var    int                 $itemsPerPage         A display setting showing a number of records per page (e.g., 15)
+     * @var    int                 $maxPagesToShow       A maximum number of pages for the <select> menu (e.g., 10)
      * @var    string              $searchPattern        A search pattern used in the url (:search) (e.g., 'dillon-or-drop')
-     * @var    integer             $currentPageNumber    A current page number (e.g., 8)
+     * @var    int                 $currentPageNumber    A current page number (e.g., 8)
      * @var    \Closure            $renderAsJson         A closure callback for encoding json data
      * @var    \Closure            $limitPerPageOffset   A closure callback for the limit offset
      * @var    boolean             $isUrlPatternUsed     A boolean option that enables the pattern type
@@ -130,8 +130,8 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * @var    boolean             $isItemsPerPageUsed   A boolean option that enables the pattern type
      * @var    boolean             $isSearchPatternUsed  A boolean option that enables the pattern type
      * @var    array               $storageRegister      A set of validation stored data elements
-     * @static PaginationInterface $instance             A PaginationInterface instance
-     * @static integer             $objectCount          A PaginationInterface instance count
+     * @static PaginationInterface $instance             A PaginationInterface
+     * @static int                 $objectCount          A PaginationInterface count
      */
     protected $pageCount = null;
     protected $totalItems = null;
@@ -171,7 +171,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     public function __construct(array $settings)
     {
         /**
-         * Buisiness rules expected on setup:
+         * Buisiness rules expected on setup.
          *
          *    $this->itemsPerPage can never be < 1
          *    $this->maxPagesToShow can never be < 3
@@ -249,7 +249,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the limit per page offset (for SQL LIMIT statement).
+     *
+     * @return array
+     *
+     * @api
      */
     public function getLimitPerPageOffset(\Closure $overridePerPageOffset = null, $newPage = null)
     {
@@ -281,9 +285,17 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Recalculates any updated settings parameter.
+     *
+     * @param array $settings  A list of per page settings.
+     *
+     * @return PaginationInterface
+     *
+     * @throws \InvalidArgumentException if $settings is null.
+     *
+     * @api
      */
-    public function recalculate(array $settings)
+    public function recalculate(array $settings): PaginationInterface
     {
         if (!($this->limitPerPageOffset instanceof \Closure)) {
             throw new \Exception('LimitPerPageOffset callback not found, set it using Paginator::setLimitPerPageOffset()');
@@ -311,7 +323,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the page url.
+     *
+     * @param int $pageNumber  A page number for the url pattern
+     *
+     * @return string
+     *
+     * @api
      */
     public function getPageUrl($pageNumber)
     {
@@ -335,7 +353,25 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Render the pagination via data array.
+     *
+     * Example:
+     *
+     * array(
+     *     array ('pageNumber' => 1,     'pageUrl' => '/personnel/page-1/',  'isCurrentPage' => false),
+     *     array ('pageNumber' => '...', 'pageUrl' => null,                  'isCurrentPage' => false),
+     *     array ('pageNumber' => 7,     'pageUrl' => '/personnel/page-7/',  'isCurrentPage' => false),
+     *     array ('pageNumber' => 8,     'pageUrl' => '/personnel/page-8/',  'isCurrentPage' => false),
+     *     array ('pageNumber' => 9,     'pageUrl' => '/personnel/page-9/',  'isCurrentPage' => true ),
+     *     array ('pageNumber' => 10,    'pageUrl' => '/personnel/page-10/', 'isCurrentPage' => false),
+     *     array ('pageNumber' => 11,    'pageUrl' => '/personnel/page-11/', 'isCurrentPage' => false),
+     *     array ('pageNumber' => '...', 'pageUrl' => null,                  'isCurrentPage' => false),
+     *     array ('pageNumber' => 18,    'pageUrl' => '/personnel/page-18/', 'isCurrentPage' => false),
+     * );
+     *
+     * @return array
+     *
+     * @api
      */
     public function renderAsArray()
     {
@@ -396,8 +432,8 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Create a page data structure.
      *
-     * @param  integer $pageNumber     A page number for data structure
-     * @param  boolean $isCurrentPage  A boolean if is the current page
+     * @param int     $pageNumber     A page number for data structure
+     * @param boolean $isCurrentPage  A boolean if is the current page
      *
      * @return array
      */
@@ -413,7 +449,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Render a small HTML pagination control.
+     *
+     * @return string
+     *
+     * @api
      */
     public function renderCompactPaging()
     {
@@ -479,7 +519,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Render a long HTML pagination control.
+     *
+     * @return string
+     *
+     * @api
      */
     public function renderLargePaging()
     {
@@ -523,7 +567,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the next page number.
+     *
+     * @return int
+     *
+     * @api
      */
     public function getCurrentPageFirstItem()
     {
@@ -535,7 +583,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the last item for the current page.
+     *
+     * @return int
+     *
+     * @api
      */
     public function getCurrentPageLastItem()
     {
@@ -596,7 +648,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Get the page offset.
      *
-     * @return integer
+     * @return int
      *
      * @api
      */
@@ -624,9 +676,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the calculated page count.
+     *
+     * @return int
+     *
+     * @api
      */
-    public function getPageCount()
+    public function getPageCount(): int
     {
         return (int) $this->getProperty('pageCount');
     }
@@ -636,9 +692,9 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Determine if the given value is a valid page number.
      *
-     * @param  integer $page  A page number.
+     * @param int  $page  A page number.
      *
-     * @return Boolean
+     * @return bool
      */
     protected function isValidPageNumber($page)
     {
@@ -648,9 +704,17 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Set the maximum pages to display.
+     *
+     * @param int $maxPagesToShow  A number of pages to display.
+     *
+     * @return PaginationInterface
+     *
+     * @throws \InvalidArgumentException if $maxPagesToShow is less than 3.
+     *
+     * @api
      */
-    public function setMaxPagesToShow($maxPagesToShow)
+    public function setMaxPagesToShow(int $maxPagesToShow): PaginationInterface
     {
         if ((int) $maxPagesToShow < 3) {
             throw new \InvalidArgumentException('maxPagesToShow cannot be less than 3.');
@@ -664,9 +728,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the maximum pages to display.
+     *
+     * @return int
+     *
+     * @api
      */
-    public function getMaxPagesToShow()
+    public function getMaxPagesToShow(): int
     {
         return (int) $this->getProperty('maxPagesToShow');
     }
@@ -674,7 +742,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Set the current page number.
+     *
+     * @param int $currentPageNumber  A current page number.
+     *
+     * @return PaginationInterface
+     *
+     * @api
      */
     public function setCurrentPageNumber($currentPageNumber = null): PaginationInterface
     {
@@ -690,7 +764,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the current page number.
+     *
+     * @return int
+     *
+     * @api
      */
     public function getCurrentPageNumber()
     {
@@ -700,7 +778,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Set the number of items (records) per page.
+     *
+     * @param int $itemsPerPage  A number of items per page
+     *
+     * @return PaginationInterface
+     *
+     * @api
      */
     public function setItemsPerPage($itemsPerPage): PaginationInterface
     {
@@ -713,7 +797,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the number of items (records) per page.
+     *
+     * @return int
+     *
+     * @api
      */
     public function getItemsPerPage()
     {
@@ -723,7 +811,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Set the total number of records in total.
+     *
+     * @param int $totalItems  A number of total records in database
+     *
+     * @return PaginationInterface
+     *
+     * @api
      */
     public function setTotalItems($totalItems): PaginationInterface
     {
@@ -736,7 +830,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the number of items in database.
+     *
+     * @return int
+     *
+     * @api
      */
     public function getTotalItems()
     {
@@ -746,7 +844,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the number of pages.
+     *
+     * @return int
+     *
+     * @api
      */
     public function getNumPages()
     {
@@ -756,7 +858,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the next page number.
+     *
+     * @return int
+     *
+     * @api
      */
     public function getNextPage()
     {
@@ -768,7 +874,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the previous page number.
+     *
+     * @return int
+     *
+     * @api
      */
     public function getPrevPage()
     {
@@ -780,7 +890,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the next page url.
+     *
+     * @return string|null
+     *
+     * @api
      */
     public function getNextUrl()
     {
@@ -792,7 +906,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the previous page url.
+     *
+     * @return string|null
+     *
+     * @api
      */
     public function getPrevUrl()
     {
@@ -804,7 +922,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Set the url pattern for rendering pagination (scheme).
+     *
+     * @param string $urlPattern  A base SEO url pattern
+     *
+     * @return PaginationInterface
+     *
+     * @api
      */
     public function setUrlPattern($urlPattern): PaginationInterface
     {
@@ -816,7 +940,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Get the assigned url pattern.
+     *
+     * @return string
+     *
+     * @api
      */
     public function getUrlPattern()
     {

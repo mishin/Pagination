@@ -11,10 +11,10 @@
 [![Build Status](https://scrutinizer-ci.com/g/ucsdmath/Pagination/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ucsdmath/Pagination/build-status/master)
 [![Latest Stable Version](https://poser.pugx.org/ucsdmath/Pagination/v/stable)](https://packagist.org/packages/ucsdmath/Pagination)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.0-8892BF.svg?style=flat)](https://php.net/)
-[![License](https://poser.pugx.org/ucsdmath/Pagination/license)](https://packagist.org/packages/ucsdmath/Pagination)
 [![Total Downloads](https://poser.pugx.org/ucsdmath/Pagination/downloads)](https://packagist.org/packages/ucsdmath/Pagination)
 [![Latest Unstable Version](https://poser.pugx.org/ucsdmath/Pagination/v/unstable)](https://packagist.org/packages/ucsdmath/Pagination)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ucsdmath/Pagination/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ucsdmath/Pagination/?branch=master)
+[![License](https://poser.pugx.org/ucsdmath/Pagination/license)](https://packagist.org/packages/ucsdmath/Pagination)
 
 Pagination is a testing and development library only. This is not to be used in a production.
 

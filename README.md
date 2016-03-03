@@ -18,6 +18,10 @@
 
 Pagination is a testing and development library only. This is not to be used in a production.
 
+Copy this software from:
+- [Packagist.org](https://packagist.org/packages/ucsdmath/Pagination)
+- [Github.com](https://github.com/ucsdmath/Pagination)
+
 ## Installation using [Composer](http://getcomposer.org/)
 You can install the class ```Pagination``` with Composer and Packagist by
 adding the ucsdmath/pagination package to your composer.json file:

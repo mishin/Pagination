@@ -186,7 +186,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         /**
          * Callback to {$limitPerPageOffset} for Page Override.
          */
-        $this->setLimitPerPageOffset(function ($currentPageNumber) use (&$settings) {
+        $this->setLimitPerPageOffset(function($currentPageNumber) use (&$settings) {
             $offset = $this->setPageOffset()->getPageOffset() + ($currentPageNumber * $this->itemsPerPage);
             return [$offset, $this->itemsPerPage];
         });
@@ -194,7 +194,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         /**
          * Callback to {$renderAsJson} for JSON Encoded Data Structures.
          */
-        $this->setRenderAsJson(function () use (&$settings) {
+        $this->setRenderAsJson(function() use (&$settings) {
             $this->setProperty('totalItems', (int) $settings['totalItems']);
             $this->setProperty('itemsPerPage', (int) $settings['itemsPerPage']);
             $this->setPageCount();

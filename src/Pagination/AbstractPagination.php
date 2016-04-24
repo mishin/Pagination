@@ -3,7 +3,7 @@
 /*
  * This file is part of the UCSDMath package.
  *
- * (c) UCSD Mathematics | Math Computing Support <mathhelp@math.ucsd.edu>
+ * Copyright 2016 UCSD Mathematics | Math Computing Support <mathhelp@math.ucsd.edu>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -69,7 +69,7 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
  * (+) string renderLargePaging();
  * (+) string renderCompactPaging();
  * (+) string getPageUrl($pageNumber);
- * (+) boolean isValidPageNumber($page);
+ * (+) bool isValidPageNumber($page);
  * (+) int     getCurrentPageLastItem();
  * (+) int     getCurrentPageFirstItem();
  * (+) PaginationInterface recalculate(array $settings);
@@ -126,10 +126,10 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * @var    int                 $currentPageNumber    A current page number (e.g., 8)
      * @var    \Closure            $renderAsJson         A closure callback for encoding json data
      * @var    \Closure            $limitPerPageOffset   A closure callback for the limit offset
-     * @var    boolean             $isUrlPatternUsed     A boolean option that enables the pattern type
-     * @var    boolean             $isSortPatternUsed    A boolean option that enables the pattern type
-     * @var    boolean             $isItemsPerPageUsed   A boolean option that enables the pattern type
-     * @var    boolean             $isSearchPatternUsed  A boolean option that enables the pattern type
+     * @var    bool                $isUrlPatternUsed     A boolean option that enables the pattern type
+     * @var    bool                $isSortPatternUsed    A boolean option that enables the pattern type
+     * @var    bool                $isItemsPerPageUsed   A boolean option that enables the pattern type
+     * @var    bool                $isSearchPatternUsed  A boolean option that enables the pattern type
      * @var    array               $storageRegister      A set of validation stored data elements
      * @static PaginationInterface $instance             A PaginationInterface
      * @static int                 $objectCount          A PaginationInterface count
@@ -433,8 +433,8 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Create a page data structure.
      *
-     * @param int     $pageNumber     A page number for data structure
-     * @param boolean $isCurrentPage  A boolean if is the current page
+     * @param int  $pageNumber     A page number for data structure
+     * @param bool $isCurrentPage  A boolean if is the current page
      *
      * @return array
      */

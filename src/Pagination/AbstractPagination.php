@@ -751,10 +751,10 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function setCurrentPageNumber($currentPageNumber = null): PaginationInterface
+    public function setCurrentPageNumber(int $currentPageNumber = null): PaginationInterface
     {
         if (null !== $currentPageNumber) {
-            $this->setProperty('currentPageNumber', (int) $currentPageNumber);
+            $this->setProperty('currentPageNumber', $currentPageNumber);
         }
 
         $this->normalizePageCounts();
@@ -771,9 +771,9 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function getCurrentPageNumber()
+    public function getCurrentPageNumber(): int
     {
-        return $this->currentPageNumber > $this->pageCount ? static::BASE_PAGE : $this->currentPageNumber;
+        return $this->currentPageNumber > $this->pageCount ? static::BASE_PAGE : (int) $this->currentPageNumber;
     }
 
     // --------------------------------------------------------------------------
@@ -787,9 +787,9 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function setItemsPerPage($itemsPerPage): PaginationInterface
+    public function setItemsPerPage(int $itemsPerPage): PaginationInterface
     {
-        $this->setProperty('itemsPerPage', (int) $itemsPerPage);
+        $this->setProperty('itemsPerPage', $itemsPerPage);
         $this->updateNumPages();
 
         return $this;
@@ -804,7 +804,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function getItemsPerPage()
+    public function getItemsPerPage(): int
     {
         return (int) $this->getProperty('itemsPerPage');
     }
@@ -820,9 +820,9 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function setTotalItems($totalItems): PaginationInterface
+    public function setTotalItems(int $totalItems): PaginationInterface
     {
-        $this->setProperty('totalItems', (int) $totalItems);
+        $this->setProperty('totalItems', $totalItems);
         $this->updateNumPages();
 
         return $this;
@@ -837,7 +837,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function getTotalItems()
+    public function getTotalItems(): int
     {
         return (int) $this->getProperty('totalItems');
     }
@@ -851,7 +851,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function getNumPages()
+    public function getNumPages(): int
     {
         return (int) $this->getProperty('pageCount');
     }

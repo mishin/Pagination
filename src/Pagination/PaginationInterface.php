@@ -110,7 +110,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function setCurrentPageNumber($currentPageNumber = null): PaginationInterface;
+    public function setCurrentPageNumber(int $currentPageNumber = null): PaginationInterface;
 
     // --------------------------------------------------------------------------
 
@@ -121,7 +121,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function getCurrentPageNumber();
+    public function getCurrentPageNumber(): int;
 
     // --------------------------------------------------------------------------
 
@@ -134,7 +134,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function setItemsPerPage($itemsPerPage): PaginationInterface;
+    public function setItemsPerPage(int $itemsPerPage): PaginationInterface;
 
     // --------------------------------------------------------------------------
 
@@ -158,7 +158,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function setTotalItems($totalItems): PaginationInterface;
+    public function setTotalItems(int $totalItems): PaginationInterface;
 
     // --------------------------------------------------------------------------
 
@@ -169,7 +169,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function getTotalItems();
+    public function getTotalItems(): int;
 
     // --------------------------------------------------------------------------
 
@@ -180,7 +180,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function getNumPages();
+    public function getNumPages(): int;
 
     // --------------------------------------------------------------------------
 

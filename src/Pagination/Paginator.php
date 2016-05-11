@@ -140,9 +140,8 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
                 $html .= '    <option disabled>' . $render['pageNumber'] . '</option>' . "\n";
             }
         }
-        $html .= '</select>' . "\n";
 
-        return $html;
+        return $html . '</select>' . "\n";
     }
 
     // --------------------------------------------------------------------------
@@ -192,9 +191,8 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
             $html .= '<button class="button secondary" id="button-pagination-show" name="button" type="button" tabindex="93" title="Show records per page" value="pagination-show">Show</button>' . "\n";
             $html .= sprintf('<input class="input-paginator-items-per-page" id="paginator-items-per-page" name="paginator-items-per-page" type="text" maxlength="5" tabindex="94" title="Provide the number of records per page" value="%s">', $this->itemsPerPage);
         }
-        $html .= "</div>\n<!-- /paging controls -->";
 
-        return $html;
+        return $html . "</div>\n<!-- /paging controls -->";
     }
 
     // --------------------------------------------------------------------------
@@ -206,18 +204,15 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
      *
      * @api
      */
-    public function renderLargePaging()
+    public function renderLargePaging(): string
     {
-        if ($this->pageCount <= 1) {
-            return '';
-        }
-        $html = '<ul class="pagination">';
-        $html .= $this->getLargePagingPrevUrl();
-        $html .= $this->getLargePagingSelections();
-        $html .= $this->getLargePagingNextUrl();
-        $html .= "</ul>\n";
-
-        return $html;
+        return ($this->pageCount <= 1)
+            ? ''
+            : '<ul class="pagination">'.
+            $this->getLargePagingPrevUrl().
+            $this->getLargePagingSelections().
+            $this->getLargePagingNextUrl().
+            "</ul>\n";
     }
 
     // --------------------------------------------------------------------------
@@ -299,7 +294,6 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         } else {
             /* Determine the sliding range, centered around the current page */
             list($slidingStart, $slidingEnd) = $this->getAsArraySlidingRange();
-
             /* Build the list of pages */
             $pages = $this->getAsArrayListingPages($slidingStart, $slidingEnd);
         }

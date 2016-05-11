@@ -56,6 +56,11 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         parent::__construct($settings);
     }
 
+    // --------------------------------------------------------------------------
+
+    /**
+     * Abstract Method Requirements.
+     */
     abstract public function renderAsArray();
     abstract public function renderLargePaging();
     abstract public function renderCompactPaging();

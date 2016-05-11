@@ -107,60 +107,92 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
     public function renderCompactPaging()
     {
         $html = '';
-
         if ($this->getNumPages() > 1) {
-            $html .= $this->isItemsPerPageUsed
-                ? sprintf('%s<!-- paging controls -->%s<div class="%s">%s', "\n", "\n", 'paging-container', "\n")
-                : sprintf('%s<!-- paging controls -->%s<div class="%s">%s', "\n", "\n", 'paging-container-no-show-records', "\n");
-
-            $html .= $this->getPrevUrl()
-                ? sprintf('<span class="fl"><a class="btn btn-default" href="%s" tabindex="90" title="Select the next page" type="button">%s</a></span>%s', str_replace(['"'], ['%22'], $this->getPrevUrl()), static::NAVIGATION_ARROW_PREV, "\n")
-                : sprintf('<span class="fl"><a class="btn btn-default" href="%s" tabindex="90" title="Select the previous page" type="button">%s</a></span>%s', '#', static::NAVIGATION_ARROW_PREV, "\n");
-
-            $html .= sprintf('<select class="form-control paging-select" tabindex="91" title="Jump to a selected page">%s', "\n");
-
-            foreach ($this->renderAsArray() as $render) {
-                if ($render['pageUrl']) {
-                    $html .= '    <option value="' . str_replace(['"'], ['%22'], $render['pageUrl']) . '"';
-                    $html .= $render['isCurrentPage'] ? ' selected="selected">' : '>';
-                    $html .= 'Page ' . $render['pageNumber'] . '</option>' . "\n";
-
-                } else {
-                    $html .= '    <option disabled>' . $render['pageNumber'] . '</option>' . "\n";
-                }
-            }
-
-            $html .= '</select>' . "\n";
-
-            $html .= $this->getNextUrl()
-                ? sprintf('<span class="fl"><a class="btn btn-default" href="%s" tabindex="92" title="Select the next page" type="button">%s</a></span>%s', str_replace(['"'], ['%22'], $this->getNextUrl()), static::NAVIGATION_ARROW_NEXT, "\n")
-                : sprintf('<span class="fl"><a class="btn btn-default" href="%s" tabindex="92" title="Select the next page" type="button">%s</a></span>%s', '#', static::NAVIGATION_ARROW_NEXT, "\n");
-
-            if ($this->isItemsPerPageUsed) {
-                $html .= '<button class="button secondary" id="button-pagination-show" name="button" type="button" tabindex="93" title="Show records per page" value="pagination-show">Show</button>' . "\n";
-                $html .= sprintf('<input class="input-paginator-items-per-page" id="paginator-items-per-page" name="paginator-items-per-page" type="text" maxlength="5" tabindex="94" title="Provide the number of records per page" value="%s">', $this->itemsPerPage);
-            }
-
-            $html .= "</div>\n<!-- /paging controls -->";
-
+            $html .= $this->getCompactPagingPrevUrl();
+            $html .= $this->getCompactPagingSelectController();
+            $html .= $this->getCompactPagingNextUrl();
         } else {
-            $html .= $this->isItemsPerPageUsed
-                ? sprintf('%s<!-- paging controls -->%s<div class="%s">%s', "\n", "\n", 'paging-container', "\n")
-                : sprintf('%s<!-- paging controls -->%s<div class="%s">%s', "\n", "\n", 'paging-container-no-show-records', "\n");
-
             $html .= sprintf('<span class="fl"><a class="btn btn-default no-pe" href="%s" tabindex="90" title="Select the previous page" type="button">%s</a></span>%s', '#', static::NAVIGATION_ARROW_PREV, "\n");
             $html .= sprintf('<select class="form-control paging-select" tabindex="91" title="Jump to a selected page">%s    <option value="%s" %s>Page 1</option>%s</select>', "\n", str_replace(['"'], ['%22'], $this->getPageUrl(1)), 'selected="selected"', "\n", "\n");
             $html .= sprintf('<span class="fl"><a class="btn btn-default no-pe" href="%s" tabindex="92" title="Select the next page" type="button">%s</a></span>%s', '#', static::NAVIGATION_ARROW_NEXT, "\n");
-
-            if ($this->isItemsPerPageUsed) {
-                $html .= '<button class="button secondary" id="button-pagination-show" name="button" type="button" tabindex="93" value="pagination-show">Show</button>' . "\n";
-                $html .= sprintf('<input class="input-paginator-items-per-page" id="paginator-items-per-page" name="paginator-items-per-page" type="text" maxlength="5" tabindex="95" title="Provide the number of records per page" value="%s">', $this->itemsPerPage);
-            }
-
-            $html .= "</div>\n<!-- /paging controls -->";
         }
-
         /* comment: jQuery pagination in /sso/1/assets/js/vendor/ucsdmath-functions.min.js */
+
+        return $this->getCompactPagingContainer($html);
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Create a page data structure.
+     *
+     * @return string
+     */
+    protected function getCompactPagingSelectController(): string
+    {
+        $html = sprintf('<select class="form-control paging-select" tabindex="91" title="Jump to a selected page">%s', "\n");
+        foreach ($this->renderAsArray() as $render) {
+            if ($render['pageUrl']) {
+                $html .= '    <option value="' . str_replace(['"'], ['%22'], $render['pageUrl']) . '"';
+                $html .= $render['isCurrentPage'] ? ' selected="selected">' : '>';
+                $html .= 'Page ' . $render['pageNumber'] . '</option>' . "\n";
+            } else {
+                $html .= '    <option disabled>' . $render['pageNumber'] . '</option>' . "\n";
+            }
+        }
+        $html .= '</select>' . "\n";
+
+        return $html;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Create a page data structure.
+     *
+     * @return string
+     */
+    protected function getCompactPagingNextUrl(): string
+    {
+        return $this->getNextUrl()
+            ? sprintf('<span class="fl"><a class="btn btn-default" href="%s" tabindex="92" title="Select the next page" type="button">%s</a></span>%s', str_replace(['"'], ['%22'], $this->getNextUrl()), static::NAVIGATION_ARROW_NEXT, "\n")
+            : sprintf('<span class="fl"><a class="btn btn-default" href="%s" tabindex="92" title="Select the next page" type="button">%s</a></span>%s', '#', static::NAVIGATION_ARROW_NEXT, "\n");
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Create a page data structure.
+     *
+     * @return string
+     */
+    protected function getCompactPagingPrevUrl(): string
+    {
+        return $this->getPrevUrl()
+            ? sprintf('<span class="fl"><a class="btn btn-default" href="%s" tabindex="90" title="Select the next page" type="button">%s</a></span>%s', str_replace(['"'], ['%22'], $this->getPrevUrl()), static::NAVIGATION_ARROW_PREV, "\n")
+            : sprintf('<span class="fl"><a class="btn btn-default" href="%s" tabindex="90" title="Select the previous page" type="button">%s</a></span>%s', '#', static::NAVIGATION_ARROW_PREV, "\n");
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Create a page data structure.
+     *
+     * @param string $containData A set of controls to contain (HTML)
+     *
+     * @return string
+     */
+    protected function getCompactPagingContainer($containData): string
+    {
+        $html = $this->isItemsPerPageUsed
+            ? sprintf('%s<!-- paging controls -->%s<div class="%s">%s', "\n", "\n", 'paging-container', "\n")
+            : sprintf('%s<!-- paging controls -->%s<div class="%s">%s', "\n", "\n", 'paging-container-no-show-records', "\n");
+        $html .= $containData;
+        if ($this->isItemsPerPageUsed) {
+            $html .= '<button class="button secondary" id="button-pagination-show" name="button" type="button" tabindex="93" title="Show records per page" value="pagination-show">Show</button>' . "\n";
+            $html .= sprintf('<input class="input-paginator-items-per-page" id="paginator-items-per-page" name="paginator-items-per-page" type="text" maxlength="5" tabindex="94" title="Provide the number of records per page" value="%s">', $this->itemsPerPage);
+        }
+        $html .= "</div>\n<!-- /paging controls -->";
 
         return $html;
     }

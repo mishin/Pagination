@@ -303,7 +303,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     public function recalculate(array $settings): PaginationInterface
     {
         $this->limitPerPageOffset instanceof \Closure
-            ?: throw new \Exception('LimitPerPageOffset callback not found, set it using Paginator::setLimitPerPageOffset()');
+            ?: $this->throwExceptionError([__METHOD__, __CLASS__, 'LimitPerPageOffset callback not found, set it using Paginator::setLimitPerPageOffset()', 'A105']);
         foreach ($settings as $key => $value) {
             if (property_exists($this, $key)) {
                 $this->setProperty($key, $value);

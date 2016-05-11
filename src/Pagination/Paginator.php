@@ -64,7 +64,7 @@ namespace UCSDMath\Pagination;
  *
  * @api
  */
-class Paginator extends AbstractPagination implements PaginationInterface
+class Paginator extends PaginationOperations implements PaginationInterface
 {
     /**
      * Constants.

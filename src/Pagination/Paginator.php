@@ -261,55 +261,71 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
     public function renderAsArray()
     {
         $pages = array();
-
         if ($this->pageCount <= 1) {
             return $pages;
         }
-
         if ($this->pageCount <= $this->maxPagesToShow) {
             for ($i = 1; $i <= $this->pageCount; $i++) {
                 $pages[] = $this->createPage($i, $i === (int) $this->currentPageNumber);
             }
         } else {
             /* Determine the sliding range, centered around the current page */
-            $numberAdjacents = (int) floor(($this->maxPagesToShow - 3) / 2);
-
-            if ((int) $this->currentPageNumber + $numberAdjacents > $this->pageCount) {
-                $slidingStart = $this->pageCount - $this->maxPagesToShow + 2;
-
-            } else {
-                $slidingStart = (int) $this->currentPageNumber - $numberAdjacents;
-            }
-
-            if ($slidingStart < 2) {
-                $slidingStart = 2;
-            }
-
-            $slidingEnd = $slidingStart + $this->maxPagesToShow - 3;
-
-            if ($slidingEnd >= $this->pageCount) {
-                $slidingEnd = $this->pageCount - 1;
-            }
+            list($slidingStart, $slidingEnd) = $this->getAsArraySlidingRange();
 
             /* Build the list of pages */
-            $pages[] = $this->createPage(1, (int) $this->currentPageNumber === 1);
-
-            if ($slidingStart > 2) {
-                $pages[] = $this->renderPageEllipsis;
-            }
-
-            for ($i = $slidingStart; $i <= $slidingEnd; $i++) {
-                $pages[] = $this->createPage($i, $i === (int) $this->currentPageNumber);
-            }
-
-            if ($slidingEnd < $this->pageCount - 1) {
-                $pages[] = $this->renderPageEllipsis;
-            }
-
-            $pages[] = $this->createPage($this->pageCount, (int) $this->currentPageNumber === $this->pageCount);
+            $pages = $this->getAsArrayListingPages($slidingStart, $slidingEnd);
         }
 
         return $pages;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Create a page data structure.
+     *
+     * @param int $slidingStart A sliding start number
+     * @param int $slidingEnd   A sliding end number
+     *
+     * @return array
+     */
+    protected function getAsArrayListingPages(int $slidingStart, int $slidingEnd): array
+    {
+        /* Build the list of pages */
+        $pages[] = $this->createPage(1, (int) $this->currentPageNumber === 1);
+        if ($slidingStart > 2) {
+            $pages[] = $this->renderPageEllipsis;
+        }
+        for ($i = $slidingStart; $i <= $slidingEnd; $i++) {
+            $pages[] = $this->createPage($i, $i === (int) $this->currentPageNumber);
+        }
+        if ($slidingEnd < $this->pageCount - 1) {
+            $pages[] = $this->renderPageEllipsis;
+        }
+        $pages[] = $this->createPage($this->pageCount, (int) $this->currentPageNumber === $this->pageCount);
+
+        return $pages;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Create a page data structure.
+     *
+     * @return array
+     */
+    protected function getAsArraySlidingRange(): array
+    {
+        /* Determine the sliding range, centered around the current page */
+        $numberAdjacents = (int) floor(($this->maxPagesToShow - 3) / 2);
+        $slidingStart = ((int) $this->currentPageNumber + $numberAdjacents > $this->pageCount)
+            ? $this->pageCount - $this->maxPagesToShow + 2
+            : (int) $this->currentPageNumber - $numberAdjacents;
+        $slidingStart = ($slidingStart < 2) ? 2 : $slidingStart;
+        $slidingEnd = $slidingStart + $this->maxPagesToShow - 3;
+        $slidingEnd = ($slidingEnd >= $this->pageCount) ? $this->pageCount - 1 : $slidingEnd;
+
+        return [$slidingStart, $slidingEnd];
     }
 
     // --------------------------------------------------------------------------

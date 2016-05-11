@@ -210,6 +210,28 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     // --------------------------------------------------------------------------
 
     /**
+     * Set the maximum pages to display.
+     *
+     * @param int $maxPagesToShow  A number of pages to display.
+     *
+     * @return PaginationInterface
+     *
+     * @throws \InvalidArgumentException if $maxPagesToShow is less than 3.
+     *
+     * @api
+     */
+    public function setMaxPagesToShow(int $maxPagesToShow): PaginationInterface
+    {
+        if ((int) $maxPagesToShow < 3) {
+            throw new \InvalidArgumentException('maxPagesToShow cannot be less than 3.');
+        }
+
+        return $this->setProperty('maxPagesToShow', (int) $maxPagesToShow);
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
      * Destructor.
      *
      * @api

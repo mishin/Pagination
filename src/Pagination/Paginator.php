@@ -292,9 +292,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
                 $pages[] = $this->createPage($i, $i === (int) $this->currentPageNumber);
             }
         } else {
-            /* Determine the sliding range, centered around the current page */
             list($slidingStart, $slidingEnd) = $this->getAsArraySlidingRange();
-            /* Build the list of pages */
             $pages = $this->getAsArrayListingPages($slidingStart, $slidingEnd);
         }
 
@@ -332,13 +330,12 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
     // --------------------------------------------------------------------------
 
     /**
-     * Create a page data structure.
+     * Determine the sliding range, centered around the current page.
      *
      * @return array
      */
     protected function getAsArraySlidingRange(): array
     {
-        /* Determine the sliding range, centered around the current page */
         $numberAdjacents = (int) floor(($this->maxPagesToShow - 3) / 2);
         $slidingStart = ((int) $this->currentPageNumber + $numberAdjacents > $this->pageCount) ? $this->pageCount - $this->maxPagesToShow + 2 : (int) $this->currentPageNumber - $numberAdjacents;
         $slidingStart = ($slidingStart < 2) ? 2 : $slidingStart;

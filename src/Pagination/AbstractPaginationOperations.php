@@ -90,7 +90,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
      *
      * @api
      */
-    public function getCurrentPageLastItem()
+    public function getCurrentPageLastItem(): int
     {
         $first = $this->getCurrentPageFirstItem();
         if ($first === null) {

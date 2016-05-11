@@ -319,7 +319,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function getPageUrl($pageNumber)
+    public function getPageUrl($pageNumber): string
     {
         $url = str_replace(self::PAGE_PLACEHOLDER, (int) $pageNumber, $this->urlPattern);
         $url = $this->isItemsPerPageUsed
@@ -345,7 +345,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @return array
      */
-    protected function createPage($pageNumber, $isCurrentPage = false)
+    protected function createPage($pageNumber, $isCurrentPage = false): array
     {
         return [
             'pageNumber'    => (int) $pageNumber,
@@ -375,7 +375,9 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     protected function setPageOffset(): PaginationInterface
     {
-        return $this->normalizePageCounts()->setProperty('pageOffset', abs(intval($this->currentPageNumber * $this->itemsPerPage - $this->itemsPerPage)));
+        $this->normalizePageCounts();
+
+        return $this->setProperty('pageOffset', abs(intval($this->currentPageNumber * $this->itemsPerPage - $this->itemsPerPage)));
     }
 
     // --------------------------------------------------------------------------
@@ -408,7 +410,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    protected function getPageOffset()
+    protected function getPageOffset(): int
     {
         return (int) $this->getProperty('pageOffset');
     }
@@ -418,7 +420,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Calculate the number of pages.
      *
-     * @return bool
+     * @return PaginationInterface
      */
     protected function setPageCount(): PaginationInterface
     {
@@ -450,7 +452,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @return bool
      */
-    protected function isValidPageNumber($page)
+    protected function isValidPageNumber($page): bool
     {
         return $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false;
     }
@@ -480,7 +482,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function getUrlPattern()
+    public function getUrlPattern(): string
     {
         return $this->getProperty('urlPattern');
     }

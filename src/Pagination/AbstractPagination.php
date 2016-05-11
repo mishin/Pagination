@@ -170,8 +170,6 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @param array $settings  A list of page settings.
      *
-     * @throws \LogicException on incorrect settings
-     *
      * @api
      */
     public function __construct(array $settings)
@@ -182,8 +180,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
             $offset = $this->setPageOffset()->getPageOffset() + ($currentPageNumber * $this->itemsPerPage);
             return [$offset, $this->itemsPerPage];
         });
-        $this->setPageCount();
-        $this->setCurrentPageNumber();
+        $this->setPageCount()->setCurrentPageNumber();
         static::$instance = $this;
         static::$objectCount++;
     }
@@ -229,9 +226,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     public function setLimitPerPageOffset(\Closure $limitPerPageOffset): PaginationInterface
     {
-        $this->setProperty('limitPerPageOffset', $limitPerPageOffset);
-
-        return $this;
+        return $this->setProperty('limitPerPageOffset', $limitPerPageOffset);
     }
 
     // --------------------------------------------------------------------------
@@ -241,9 +236,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     public function setRenderAsJson(\Closure $renderAsJson): PaginationInterface
     {
-        $this->setProperty('renderAsJson', $renderAsJson);
-
-        return $this;
+        return $this->setProperty('renderAsJson', $renderAsJson);
     }
 
     // --------------------------------------------------------------------------
@@ -329,15 +322,12 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     public function getPageUrl($pageNumber)
     {
         $url = str_replace(self::PAGE_PLACEHOLDER, (int) $pageNumber, $this->urlPattern);
-
         $url = $this->isItemsPerPageUsed
             ? str_replace(self::ROWS_PLACEHOLDER, (int) $this->itemsPerPage, $url)
             : str_replace(self::ROWS_PLACEHOLDER . '/', null, $url);
-
         $url = $this->isSortPatternUsed
             ? str_replace(self::SORT_PLACEHOLDER, (string) $this->sortPattern, $url)
             : str_replace(self::SORT_PLACEHOLDER . '/', null, $url);
-
         $url = $this->isSearchPatternUsed
             ? str_replace(self::SEARCH_PLACEHOLDER, (string) $this->searchPattern, $url)
             : str_replace(self::SEARCH_PLACEHOLDER . '/', null, $url);
@@ -385,10 +375,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     protected function setPageOffset(): PaginationInterface
     {
-        $this->normalizePageCounts();
-        $this->setProperty('pageOffset', abs(intval($this->currentPageNumber * $this->itemsPerPage - $this->itemsPerPage)));
-
-        return $this;
+        return $this->normalizePageCounts()->setProperty('pageOffset', abs(intval($this->currentPageNumber * $this->itemsPerPage - $this->itemsPerPage)));
     }
 
     // --------------------------------------------------------------------------
@@ -402,12 +389,9 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     protected function normalizePageCounts(): PaginationInterface
     {
-        if ($this->currentPageNumber > $this->pageCount
-            || $this->currentPageNumber < static::BASE_PAGE
-        ) {
+        if ($this->currentPageNumber > $this->pageCount || $this->currentPageNumber < static::BASE_PAGE) {
             $this->setProperty('currentPageNumber', static::BASE_PAGE);
         }
-
         if ($this->itemsPerPage < 1) {
             $this->setProperty('itemsPerPage', static::BASE_PAGE);
         }
@@ -438,11 +422,9 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     protected function setPageCount(): PaginationInterface
     {
-        ((int) $this->itemsPerPage === 0)
+        return ((int) $this->itemsPerPage === 0)
             ? $this->setProperty('pageCount', 0)
             : $this->setProperty('pageCount', (int) ceil((int) $this->totalItems / (int) $this->itemsPerPage));
-
-        return $this;
     }
 
     // --------------------------------------------------------------------------
@@ -486,9 +468,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     public function setUrlPattern($urlPattern): PaginationInterface
     {
-        $this->setProperty('urlPattern', (string) $urlPattern);
-
-        return $this;
+        return $this->setProperty('urlPattern', (string) $urlPattern);
     }
 
     // --------------------------------------------------------------------------

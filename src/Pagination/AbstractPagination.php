@@ -163,6 +163,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Constructor.
      *
+     * Business rules expected on setup:
+     *    $this->itemsPerPage can never be < 1
+     *    $this->maxPagesToShow can never be < 3
+     *    $this->currentPageNumber can never be < 1
+     *
      * @param array $settings  A list of page settings.
      *
      * @throws \LogicException on incorrect settings
@@ -171,30 +176,15 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     public function __construct(array $settings)
     {
-        /**
-         * Buisiness rules expected on setup.
-         *
-         *    $this->itemsPerPage can never be < 1
-         *    $this->maxPagesToShow can never be < 3
-         *    $this->currentPageNumber can never be < 1
-         */
-        foreach ($settings as $key => $value) {
-            if (property_exists($this, $key)) {
-                $this->setProperty($key, $value);
-            }
-        }
+        $this->loadStartupSettings($settings);
 
-        /**
-         * Callback to {$limitPerPageOffset} for Page Override.
-         */
+        /* Callback to {$limitPerPageOffset} for Page Override. */
         $this->setLimitPerPageOffset(function($currentPageNumber) use (&$settings) {
             $offset = $this->setPageOffset()->getPageOffset() + ($currentPageNumber * $this->itemsPerPage);
             return [$offset, $this->itemsPerPage];
         });
 
-        /**
-         * Callback to {$renderAsJson} for JSON Encoded Data Structures.
-         */
+        /* Callback to {$renderAsJson} for JSON Encoded Data Structures. */
         $this->setRenderAsJson(function() use (&$settings) {
             $this->setProperty('totalItems', (int) $settings['totalItems']);
             $this->setProperty('itemsPerPage', (int) $settings['itemsPerPage']);
@@ -206,9 +196,30 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
 
         $this->setPageCount();
         $this->setCurrentPageNumber();
-
         static::$instance = $this;
         static::$objectCount++;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Load Settings.
+     *
+     * @param string $settings A startup configuration setting.
+     *
+     * @return PaginationInterface
+     *
+     * @api
+     */
+    public function loadStartupSettings(array $settings): PaginationInterface
+    {
+        foreach ($settings as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->setProperty($key, $value);
+            }
+        }
+
+        return $this;
     }
 
     // --------------------------------------------------------------------------

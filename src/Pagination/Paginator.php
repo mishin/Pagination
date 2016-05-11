@@ -302,34 +302,6 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
     // --------------------------------------------------------------------------
 
     /**
-     * Build the list of pages.
-     *
-     * @param int $slidingStart A sliding start number
-     * @param int $slidingEnd   A sliding end number
-     *
-     * @return array
-     */
-    protected function getAsArrayListingPages(int $slidingStart, int $slidingEnd): array
-    {
-        $pages = array();
-        $pages[] = $this->createPage(1, (int) $this->currentPageNumber === 1);
-        if ($slidingStart > 2) {
-            $pages[] = $this->renderPageEllipsis;
-        }
-        for ($i = $slidingStart; $i <= $slidingEnd; $i++) {
-            $pages[] = $this->createPage($i, $i === (int) $this->currentPageNumber);
-        }
-        if ($slidingEnd < $this->pageCount - 1) {
-            $pages[] = $this->renderPageEllipsis;
-        }
-        $pages[] = $this->createPage($this->pageCount, (int) $this->currentPageNumber === $this->pageCount);
-
-        return $pages;
-    }
-
-    // --------------------------------------------------------------------------
-
-    /**
      * Determine the sliding range, centered around the current page.
      *
      * @return array

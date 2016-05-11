@@ -64,7 +64,7 @@ namespace UCSDMath\Pagination;
  *
  * @api
  */
-class Paginator extends PaginationOperations implements PaginationInterface
+class Paginator extends AbstractPaginationOperations implements PaginationInterface
 {
     /**
      * Constants.
@@ -93,6 +93,44 @@ class Paginator extends PaginationOperations implements PaginationInterface
     public function __construct(array $settings = null)
     {
         parent::__construct($settings);
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Get the next page number.
+     *
+     * @return int
+     *
+     * @api
+     */
+    public function getCurrentPageFirstItem()
+    {
+        $first = ((int) $this->currentPageNumber - 1) * (int) $this->itemsPerPage + 1;
+
+        return $first > (int) $this->totalItems ? null : $first;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Get the last item for the current page.
+     *
+     * @return int
+     *
+     * @api
+     */
+    public function getCurrentPageLastItem()
+    {
+        $first = $this->getCurrentPageFirstItem();
+
+        if ($first === null) {
+            return null;
+        }
+
+        $last = $first + (int) $this->itemsPerPage - 1;
+
+        return ($last > (int) $this->totalItems) ? (int) $this->totalItems : $last;
     }
 
     // --------------------------------------------------------------------------

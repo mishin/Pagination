@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace UCSDMath\Pagination;
 
 /**
- * PaginationOperations is the default implementation of {@link PaginationOperationsInterface} which
+ * AbstractPaginationOperations is the default implementation of {@link AbstractPaginationOperationsInterface} which
  * provides routine database methods that are commonly used in frameworks.
  *
  * Method noted as: (+) @api, (-) protected or private visibility.
@@ -25,7 +25,7 @@ namespace UCSDMath\Pagination;
  *
  * @api
  */
-class PaginationOperations extends AbstractPagination
+abstract class AbstractPaginationOperations extends AbstractPagination
 {
     /**
      * Constants.
@@ -55,6 +55,10 @@ class PaginationOperations extends AbstractPagination
     {
         parent::__construct($settings);
     }
+
+    abstract public function getCurrentPageFirstItem();
+    abstract public function getCurrentPageLastItem();
+
 
     // --------------------------------------------------------------------------
 
@@ -457,44 +461,6 @@ class PaginationOperations extends AbstractPagination
         return $this->getPrevPage()
             ? $this->getPageUrl($this->getPrevPage())
             : null;
-    }
-
-    // --------------------------------------------------------------------------
-
-    /**
-     * Get the next page number.
-     *
-     * @return int
-     *
-     * @api
-     */
-    public function getCurrentPageFirstItem()
-    {
-        $first = ((int) $this->currentPageNumber - 1) * (int) $this->itemsPerPage + 1;
-
-        return $first > (int) $this->totalItems ? null : $first;
-    }
-
-    // --------------------------------------------------------------------------
-
-    /**
-     * Get the last item for the current page.
-     *
-     * @return int
-     *
-     * @api
-     */
-    public function getCurrentPageLastItem()
-    {
-        $first = $this->getCurrentPageFirstItem();
-
-        if ($first === null) {
-            return null;
-        }
-
-        $last = $first + (int) $this->itemsPerPage - 1;
-
-        return ($last > (int) $this->totalItems) ? (int) $this->totalItems : $last;
     }
 
     // --------------------------------------------------------------------------

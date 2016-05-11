@@ -211,18 +211,9 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         if ($this->pageCount <= 1) {
             return '';
         }
-
         $html = '<ul class="pagination">';
         $html .= $this->getLargePagingPrevUrl();
-
-        foreach ($this->renderAsArray() as $render) {
-            if ($render['pageUrl']) {
-                $html .= '<li' . ($render['isCurrentPage'] ? ' class="active"' : '') . '><a href="' . $render['pageUrl'] . '">' . $render['pageNumber'] . '</a></li>' . "\n";
-            } else {
-                $html .= sprintf('<li class="disabled"><span>%s</span></li>%s', $render['pageNumber'], "\n");
-            }
-        }
-
+        $html .= $this->getLargePagingSelections();
         $html .= $this->getLargePagingNextUrl();
         $html .= "</ul>\n";
 
@@ -257,9 +248,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
      */
     protected function getLargePagingPrevUrl(): string
     {
-        return $this->getPrevUrl()
-            ? sprintf('<li><a href="%s">%s</a></li>%s', $this->getPrevUrl(), static::NAVIGATION_ARROW_PREV, "\n")
-            : null;
+        return $this->getPrevUrl() ? sprintf('<li><a href="%s">%s</a></li>%s', $this->getPrevUrl(), static::NAVIGATION_ARROW_PREV, "\n") : null;
     }
 
     // --------------------------------------------------------------------------
@@ -271,9 +260,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
      */
     protected function getLargePagingNextUrl(): string
     {
-        return $this->getNextUrl()
-            ? sprintf('<li><a href="%s">%s</a></li>%s', $this->getNextUrl(), static::NAVIGATION_ARROW_NEXT, "\n")
-            : null;
+        return $this->getNextUrl() ? sprintf('<li><a href="%s">%s</a></li>%s', $this->getNextUrl(), static::NAVIGATION_ARROW_NEXT, "\n") : null;
     }
 
     // --------------------------------------------------------------------------
@@ -359,9 +346,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
     {
         /* Determine the sliding range, centered around the current page */
         $numberAdjacents = (int) floor(($this->maxPagesToShow - 3) / 2);
-        $slidingStart = ((int) $this->currentPageNumber + $numberAdjacents > $this->pageCount)
-            ? $this->pageCount - $this->maxPagesToShow + 2
-            : (int) $this->currentPageNumber - $numberAdjacents;
+        $slidingStart = ((int) $this->currentPageNumber + $numberAdjacents > $this->pageCount) ? $this->pageCount - $this->maxPagesToShow + 2 : (int) $this->currentPageNumber - $numberAdjacents;
         $slidingStart = ($slidingStart < 2) ? 2 : $slidingStart;
         $slidingEnd = $slidingStart + $this->maxPagesToShow - 3;
         $slidingEnd = ($slidingEnd >= $this->pageCount) ? $this->pageCount - 1 : $slidingEnd;

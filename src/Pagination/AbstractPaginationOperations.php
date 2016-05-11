@@ -93,11 +93,9 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     public function getCurrentPageLastItem()
     {
         $first = $this->getCurrentPageFirstItem();
-
         if ($first === null) {
             return null;
         }
-
         $last = $first + (int) $this->itemsPerPage - 1;
 
         return ($last > (int) $this->totalItems) ? (int) $this->totalItems : $last;
@@ -122,9 +120,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
             throw new \InvalidArgumentException('maxPagesToShow cannot be less than 3.');
         }
 
-        $this->setProperty('maxPagesToShow', (int) $maxPagesToShow);
-
-        return $this;
+        return $this->setProperty('maxPagesToShow', (int) $maxPagesToShow);
     }
 
     // --------------------------------------------------------------------------
@@ -158,9 +154,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
             $this->setProperty('currentPageNumber', $currentPageNumber);
         }
 
-        $this->normalizePageCounts();
-
-        return $this;
+        return $this->normalizePageCounts();
     }
 
     // --------------------------------------------------------------------------
@@ -268,9 +262,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
      */
     public function getNextPage()
     {
-        return (int) $this->currentPageNumber < $this->pageCount
-            ? (int) $this->currentPageNumber + 1
-            : null;
+        return (int) $this->currentPageNumber < $this->pageCount ? (int) $this->currentPageNumber + 1 : null;
     }
 
     // --------------------------------------------------------------------------
@@ -284,9 +276,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
      */
     public function getPrevPage()
     {
-        return (int) $this->currentPageNumber > 1
-            ? (int) $this->currentPageNumber - 1
-            : null;
+        return (int) $this->currentPageNumber > 1 ? (int) $this->currentPageNumber - 1 : null;
     }
 
     // --------------------------------------------------------------------------
@@ -300,9 +290,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
      */
     public function getNextUrl()
     {
-        return $this->getNextPage()
-            ? $this->getPageUrl($this->getNextPage())
-            : null;
+        return $this->getNextPage() ? $this->getPageUrl($this->getNextPage()) : null;
     }
 
     // --------------------------------------------------------------------------
@@ -316,9 +304,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
      */
     public function getPrevUrl()
     {
-        return $this->getPrevPage()
-            ? $this->getPageUrl($this->getPrevPage())
-            : null;
+        return $this->getPrevPage() ? $this->getPageUrl($this->getPrevPage()) : null;
     }
 
     // --------------------------------------------------------------------------

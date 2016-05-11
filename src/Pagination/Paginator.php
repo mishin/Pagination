@@ -213,10 +213,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         }
 
         $html = '<ul class="pagination">';
-
-        if ($this->getPrevUrl()) {
-            $html .= sprintf('<li><a href="%s">%s</a></li>%s', $this->getPrevUrl(), static::NAVIGATION_ARROW_PREV, "\n");
-        }
+        $html .= $this->getLargePagingPrevUrl();
 
         foreach ($this->renderAsArray() as $render) {
             if ($render['pageUrl']) {
@@ -226,13 +223,57 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
             }
         }
 
-        if ($this->getNextUrl()) {
-            $html .= sprintf('<li><a href="%s">%s</a></li>%s', $this->getNextUrl(), static::NAVIGATION_ARROW_NEXT, "\n");
-        }
-
+        $html .= $this->getLargePagingNextUrl();
         $html .= "</ul>\n";
 
         return $html;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Create a page data structure.
+     *
+     * @return string
+     */
+    protected function getLargePagingSelections(): string
+    {
+        $html = null;
+        foreach ($this->renderAsArray() as $render) {
+            $html .= ($render['pageUrl'])
+                ? '<li' . ($render['isCurrentPage'] ? ' class="active"' : '') . '><a href="' . $render['pageUrl'] . '">' . $render['pageNumber'] . '</a></li>' . "\n"
+                : sprintf('<li class="disabled"><span>%s</span></li>%s', $render['pageNumber'], "\n");
+        }
+
+        return $html;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Create a page data structure.
+     *
+     * @return string
+     */
+    protected function getLargePagingPrevUrl(): string
+    {
+        return $this->getPrevUrl()
+            ? sprintf('<li><a href="%s">%s</a></li>%s', $this->getPrevUrl(), static::NAVIGATION_ARROW_PREV, "\n")
+            : null;
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Create a page data structure.
+     *
+     * @return string
+     */
+    protected function getLargePagingNextUrl(): string
+    {
+        return $this->getNextUrl()
+            ? sprintf('<li><a href="%s">%s</a></li>%s', $this->getNextUrl(), static::NAVIGATION_ARROW_NEXT, "\n")
+            : null;
     }
 
     // --------------------------------------------------------------------------
@@ -258,7 +299,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
      *
      * @api
      */
-    public function renderAsArray()
+    public function renderAsArray(): array
     {
         $pages = array();
         if ($this->pageCount <= 1) {

@@ -287,6 +287,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Recalculates any updated settings parameter.
      *
+     * Buisiness rules expected on setup:
+     *    $this->itemsPerPage can never be < 1
+     *    $this->maxPagesToShow can never be < 3
+     *    $this->currentPageNumber can never be < 1
+     *
      * @param array $settings  A list of per page settings.
      *
      * @return PaginationInterface
@@ -297,23 +302,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     public function recalculate(array $settings): PaginationInterface
     {
-        if (!($this->limitPerPageOffset instanceof \Closure)) {
-            throw new \Exception('LimitPerPageOffset callback not found, set it using Paginator::setLimitPerPageOffset()');
-        }
-
-        /**
-         * Buisiness rules expected on setup:
-         *
-         *    $this->itemsPerPage can never be < 1
-         *    $this->maxPagesToShow can never be < 3
-         *    $this->currentPageNumber can never be < 1
-         */
+        $this->limitPerPageOffset instanceof \Closure
+            ?: throw new \Exception('LimitPerPageOffset callback not found, set it using Paginator::setLimitPerPageOffset()');
         foreach ($settings as $key => $value) {
             if (property_exists($this, $key)) {
                 $this->setProperty($key, $value);
             }
         }
-
         $this->setPageCount();
         $this->setCurrentPageNumber();
 

@@ -282,7 +282,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
     // --------------------------------------------------------------------------
 
     /**
-     * Create a page data structure.
+     * Build the list of pages.
      *
      * @param int $slidingStart A sliding start number
      * @param int $slidingEnd   A sliding end number
@@ -291,7 +291,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
      */
     protected function getAsArrayListingPages(int $slidingStart, int $slidingEnd): array
     {
-        /* Build the list of pages */
+        $pages = array();
         $pages[] = $this->createPage(1, (int) $this->currentPageNumber === 1);
         if ($slidingStart > 2) {
             $pages[] = $this->renderPageEllipsis;

@@ -104,7 +104,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
      *
      * @api
      */
-    public function renderCompactPaging()
+    public function renderCompactPaging(): string
     {
         $html = '';
         if ($this->getNumPages() > 1) {

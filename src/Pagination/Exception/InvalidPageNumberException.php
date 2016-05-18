@@ -25,5 +25,5 @@ use InvalidArgumentException;
  */
 class InvalidPageNumberException extends \InvalidArgumentException
 {
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 }

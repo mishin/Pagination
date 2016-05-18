@@ -75,13 +75,13 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
      */
     const VERSION = '1.7.0';
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Properties.
      */
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Constructor.
@@ -95,7 +95,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         parent::__construct($settings);
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Render a small HTML pagination control.
@@ -121,7 +121,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         return $this->getCompactPagingContainer($html);
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Create a page data structure.
@@ -144,7 +144,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         return $html . '</select>' . "\n";
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Create a page data structure.
@@ -158,7 +158,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
             : sprintf('<span class="fl"><a class="btn btn-default" href="%s" tabindex="92" title="Select the next page" type="button">%s</a></span>%s', '#', static::NAVIGATION_ARROW_NEXT, "\n");
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Create a page data structure.
@@ -172,7 +172,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
             : sprintf('<span class="fl"><a class="btn btn-default" href="%s" tabindex="90" title="Select the previous page" type="button">%s</a></span>%s', '#', static::NAVIGATION_ARROW_PREV, "\n");
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Create a page data structure.
@@ -195,7 +195,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         return $html . "</div>\n<!-- /paging controls -->";
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Render a long HTML pagination control.
@@ -215,7 +215,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
             "</ul>\n";
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Create a page data structure.
@@ -234,7 +234,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         return $html;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Create a page data structure.
@@ -246,7 +246,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         return $this->getPrevUrl() ? sprintf('<li><a href="%s">%s</a></li>%s', $this->getPrevUrl(), static::NAVIGATION_ARROW_PREV, "\n") : null;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Create a page data structure.
@@ -258,7 +258,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         return $this->getNextUrl() ? sprintf('<li><a href="%s">%s</a></li>%s', $this->getNextUrl(), static::NAVIGATION_ARROW_NEXT, "\n") : null;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Render the pagination via data array.
@@ -299,7 +299,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         return $pages;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Determine the sliding range, centered around the current page.
@@ -317,5 +317,5 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
         return [$slidingStart, $slidingEnd];
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 }

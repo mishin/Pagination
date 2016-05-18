@@ -36,14 +36,14 @@ interface PaginationInterface
     const NAVIGATION_ARROW_NEXT = 'Next&#160;&#10095;';
     const NAVIGATION_ELLIPSES   = '&#183;&#160;&#183;&#160;&#183;';
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Recalculates any updated settings parameter.
      *
      * @param array $settings  A list of per page settings.
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current interface
      *
      * @throws \InvalidArgumentException if $settings is null.
      *
@@ -51,7 +51,7 @@ interface PaginationInterface
      */
     public function recalculate(array $settings): PaginationInterface;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the calculated page count.
@@ -62,14 +62,14 @@ interface PaginationInterface
      */
     public function getPageCount(): int;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the maximum pages to display.
      *
      * @param int $maxPagesToShow  A number of pages to display.
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current interface
      *
      * @throws \InvalidArgumentException if $maxPagesToShow is less than 3.
      *
@@ -77,7 +77,7 @@ interface PaginationInterface
      */
     public function setMaxPagesToShow(int $maxPagesToShow): PaginationInterface;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the maximum pages to display.
@@ -88,7 +88,7 @@ interface PaginationInterface
      */
     public function getMaxPagesToShow(): int;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the limit per page offset (for SQL LIMIT statement).
@@ -99,20 +99,20 @@ interface PaginationInterface
      */
     public function getLimitPerPageOffset(\Closure $overridePerPageOffset = null, $newPage = null);
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the current page number.
      *
      * @param int $currentPageNumber  A current page number.
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current interface
      *
      * @api
      */
     public function setCurrentPageNumber(int $currentPageNumber = null): PaginationInterface;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the current page number.
@@ -123,20 +123,20 @@ interface PaginationInterface
      */
     public function getCurrentPageNumber(): int;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the number of items (records) per page.
      *
      * @param int $itemsPerPage  A number of items per page
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current interface
      *
      * @api
      */
     public function setItemsPerPage(int $itemsPerPage): PaginationInterface;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the number of items (records) per page.
@@ -147,20 +147,20 @@ interface PaginationInterface
      */
     public function getItemsPerPage();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the total number of records in total.
      *
      * @param int $totalItems  A number of total records in database
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current interface
      *
      * @api
      */
     public function setTotalItems(int $totalItems): PaginationInterface;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the number of items in database.
@@ -171,7 +171,7 @@ interface PaginationInterface
      */
     public function getTotalItems(): int;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the number of pages.
@@ -182,20 +182,20 @@ interface PaginationInterface
      */
     public function getNumPages(): int;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the url pattern for rendering pagination (scheme).
      *
      * @param string $urlPattern  A base SEO url pattern
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current interface
      *
      * @api
      */
     public function setUrlPattern($urlPattern): PaginationInterface;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the assigned url pattern.
@@ -206,7 +206,7 @@ interface PaginationInterface
      */
     public function getUrlPattern();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the page url.
@@ -219,7 +219,7 @@ interface PaginationInterface
      */
     public function getPageUrl($pageNumber);
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the next page number.
@@ -230,7 +230,7 @@ interface PaginationInterface
      */
     public function getNextPage();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the previous page number.
@@ -241,7 +241,7 @@ interface PaginationInterface
      */
     public function getPrevPage();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the next page url.
@@ -252,7 +252,7 @@ interface PaginationInterface
      */
     public function getNextUrl();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the previous page url.
@@ -263,7 +263,7 @@ interface PaginationInterface
      */
     public function getPrevUrl();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Render the pagination via data array.
@@ -288,7 +288,7 @@ interface PaginationInterface
      */
     public function renderAsArray();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Render a small HTML pagination control.
@@ -299,7 +299,7 @@ interface PaginationInterface
      */
     public function renderCompactPaging();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Render a long HTML pagination control.
@@ -310,7 +310,7 @@ interface PaginationInterface
      */
     public function renderLargePaging();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the next page number.
@@ -321,7 +321,7 @@ interface PaginationInterface
      */
     public function getCurrentPageFirstItem();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the last item for the current page.
@@ -332,5 +332,5 @@ interface PaginationInterface
      */
     public function getCurrentPageLastItem();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 }

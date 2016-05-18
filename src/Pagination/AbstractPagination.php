@@ -110,7 +110,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     const VERSION = '1.7.0';
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Properties.
@@ -158,7 +158,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         'pageNumber' => self::NAVIGATION_ELLIPSES,
     ];
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Constructor.
@@ -185,14 +185,14 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         static::$objectCount++;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Load Settings.
      *
      * @param string $settings A startup configuration setting.
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current instance
      *
      * @api
      */
@@ -207,14 +207,14 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $this;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the maximum pages to display.
      *
      * @param int $maxPagesToShow  A number of pages to display.
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current instance
      *
      * @throws \InvalidArgumentException if $maxPagesToShow is less than 3.
      *
@@ -229,7 +229,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $this->setProperty('maxPagesToShow', (int) $maxPagesToShow);
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Destructor.
@@ -241,7 +241,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         static::$objectCount--;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * {@inheritdoc}
@@ -251,7 +251,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $this->setProperty('limitPerPageOffset', $limitPerPageOffset);
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * {@inheritdoc}
@@ -261,7 +261,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $this->setProperty('renderAsJson', $renderAsJson);
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the limit per page offset (for SQL LIMIT statement).
@@ -279,7 +279,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
             : [$offset, $this->itemsPerPage];
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Forward to any callable, including anonymous functions
@@ -297,7 +297,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return call_user_func_array($this->$callback, $parameters);
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Recalculates any updated settings parameter.
@@ -309,7 +309,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @param array $settings  A list of per page settings.
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current instance
      *
      * @throws \InvalidArgumentException if $settings is null.
      *
@@ -330,7 +330,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $this;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the page url.
@@ -357,7 +357,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $url;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Create a page data structure.
@@ -376,7 +376,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         ];
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * {@inheritdoc}
@@ -386,12 +386,12 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $this->renderCompactPaging();
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the page offset.
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current instance
      *
      * @api
      */
@@ -402,12 +402,12 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $this->setProperty('pageOffset', abs(intval($this->currentPageNumber * $this->itemsPerPage - $this->itemsPerPage)));
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Normalize and check page counts.
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current instance
      *
      * @api
      */
@@ -423,7 +423,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $this;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the page offset.
@@ -437,12 +437,12 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return (int) $this->getProperty('pageOffset');
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Calculate the number of pages.
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current instance
      */
     protected function setPageCount(): PaginationInterface
     {
@@ -451,7 +451,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
             : $this->setProperty('pageCount', (int) ceil((int) $this->totalItems / (int) $this->itemsPerPage));
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the calculated page count.
@@ -465,7 +465,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return (int) $this->getProperty('pageCount');
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Determine if the given value is a valid page number.
@@ -479,14 +479,14 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $page >= 1 && filter_var($page, FILTER_VALIDATE_INT) !== false;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the url pattern for rendering pagination (scheme).
      *
      * @param string $urlPattern  A base SEO url pattern
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current instance
      *
      * @api
      */
@@ -495,7 +495,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $this->setProperty('urlPattern', (string) $urlPattern);
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the assigned url pattern.
@@ -509,7 +509,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
         return $this->getProperty('urlPattern');
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Method implementations inserted:
@@ -540,5 +540,5 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     use ServiceFunctions;
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 }

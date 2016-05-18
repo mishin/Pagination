@@ -36,13 +36,13 @@ abstract class AbstractPaginationOperations extends AbstractPagination
      */
     const VERSION = '1.7.0';
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Properties.
      */
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Constructor.
@@ -56,7 +56,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         parent::__construct($settings);
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Abstract Method Requirements.
@@ -65,7 +65,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     abstract public function renderLargePaging();
     abstract public function renderCompactPaging();
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the next page number.
@@ -81,7 +81,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return $first > (int) $this->totalItems ? null : $first;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the last item for the current page.
@@ -101,7 +101,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return ($last > (int) $this->totalItems) ? (int) $this->totalItems : $last;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the maximum pages to display.
@@ -115,14 +115,14 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return (int) $this->getProperty('maxPagesToShow');
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the current page number.
      *
      * @param int $currentPageNumber  A current page number.
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current instance
      *
      * @api
      */
@@ -135,7 +135,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return $this->normalizePageCounts();
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the current page number.
@@ -149,14 +149,14 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return $this->currentPageNumber > $this->pageCount ? static::BASE_PAGE : (int) $this->currentPageNumber;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the number of items (records) per page.
      *
      * @param int $itemsPerPage  A number of items per page
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current instance
      *
      * @api
      */
@@ -168,7 +168,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return $this;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the number of items (records) per page.
@@ -182,14 +182,14 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return (int) $this->getProperty('itemsPerPage');
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Set the total number of records in total.
      *
      * @param int $totalItems  A number of total records in database
      *
-     * @return PaginationInterface
+     * @return PaginationInterface The current instance
      *
      * @api
      */
@@ -201,7 +201,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return $this;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the number of items in database.
@@ -215,7 +215,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return (int) $this->getProperty('totalItems');
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the number of pages.
@@ -229,7 +229,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return (int) $this->getProperty('pageCount');
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the next page number.
@@ -243,7 +243,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return (int) $this->currentPageNumber < $this->pageCount ? (int) $this->currentPageNumber + 1 : null;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the previous page number.
@@ -257,7 +257,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return (int) $this->currentPageNumber > 1 ? (int) $this->currentPageNumber - 1 : null;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the next page url.
@@ -271,7 +271,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return $this->getNextPage() ? $this->getPageUrl($this->getNextPage()) : null;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Get the previous page url.
@@ -285,7 +285,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return $this->getPrevPage() ? $this->getPageUrl($this->getPrevPage()) : null;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
     /**
      * Build the list of pages.
@@ -313,5 +313,5 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         return $pages;
     }
 
-    // --------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 }

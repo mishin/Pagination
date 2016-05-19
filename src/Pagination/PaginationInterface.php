@@ -97,7 +97,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function getLimitPerPageOffset(\Closure $overridePerPageOffset = null, $newPage = null);
+    public function getLimitPerPageOffset(\Closure $overridePerPageOffset = null, int $newPage = null): array;
 
     //--------------------------------------------------------------------------
 
@@ -193,7 +193,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function setUrlPattern($urlPattern): PaginationInterface;
+    public function setUrlPattern(string $urlPattern): PaginationInterface;
 
     //--------------------------------------------------------------------------
 
@@ -204,7 +204,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function getUrlPattern();
+    public function getUrlPattern(): string;
 
     //--------------------------------------------------------------------------
 

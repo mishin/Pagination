@@ -72,11 +72,11 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
  * (+) bool isValidPageNumber($page);
  * (+) int     getCurrentPageLastItem();
  * (+) int     getCurrentPageFirstItem();
- * (+) PaginationInterface recalculate(array $settings);
+ * (+) PaginationInterface recalculate(array $pageSettings);
  * (+) array createPage($pageNumber, $isCurrentPage = false);
  * (+) PaginationInterface setRenderAsJson(\Closure $renderAsJson);
  * (+) PaginationInterface setLimitPerPageOffset(\Closure $limitPerPageOffset);
- * (+) array getLimitPerPageOffset(\Closure $overridePerPageOffset = null, $newPage = null);
+ * (+) array getLimitPerPageOffset(\Closure $overridePerPageOffset = null, int $newPage = null);
  * (+) mixed getPrevUrl();
  * (+) int     getNextUrl();
  * (+) int     getNumPages();
@@ -139,11 +139,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     protected $pageOffset = null;
     protected $urlPattern = null;
     protected $sortPattern = null;
-    protected $itemsPerPage = null;
+    protected $itemsPerPage = 20;
     protected $maxPagesToShow = 10;
     protected $renderAsJson = null;
     protected $searchPattern = null;
-    protected $currentPageNumber = null;
+    protected $currentPageNumber = 1;
     protected $limitPerPageOffset = null;
     protected $isUrlPatternUsed = false;
     protected $isSortPatternUsed = false;
@@ -168,15 +168,16 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *    $this->maxPagesToShow can never be < 3
      *    $this->currentPageNumber can never be < 1
      *
-     * @param array $settings  A list of page settings.
+     * @param array $pageSettings A list of page settings.
      *
      * @api
      */
-    public function __construct(array $settings)
+    public function __construct(array $pageSettings)
     {
-        $this->loadStartupSettings($settings);
+        $this->loadStartupSettings($pageSettings);
+
         /* Callback to {$limitPerPageOffset} for Page Override. */
-        $this->setLimitPerPageOffset(function($currentPageNumber) use (&$settings) {
+        $this->setLimitPerPageOffset(function($currentPageNumber) use (&$pageSettings) {
             $offset = $this->setPageOffset()->getPageOffset() + ($currentPageNumber * $this->itemsPerPage);
             return [$offset, $this->itemsPerPage];
         });
@@ -188,17 +189,30 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     //--------------------------------------------------------------------------
 
     /**
-     * Load Settings.
+     * Load Settings into assigned properties.
      *
-     * @param string $settings A startup configuration setting.
+     * Example of array items:
+     *    'totalItems'          => (int) 1082
+     *    'itemsPerPage'        => (int) 20
+     *    'currentPageNumber'   => (int) 5
+     *    'maxPagesToShow'      => (int) 10
+     *    'urlPattern'          => (string) '/sso/1/course-petitions/edit-record/(:page)/(:rows)/(:search)/(:sort)/'
+     *    'sortPattern'         => (string) 'primary_group_select-lastname-firstname'
+     *    'searchPattern'       => (string) 'dillon-and-drop'
+     *    'isUrlPatternUsed'    => (bool) true
+     *    'isItemsPerPageUsed'  => (bool) false
+     *    'isSearchPatternUsed' => (bool) false
+     *    'isSortPatternUsed'   => (bool) false
+     *
+     * @param string $pageSettings A startup configuration setting.
      *
      * @return PaginationInterface The current instance
      *
      * @api
      */
-    public function loadStartupSettings(array $settings): PaginationInterface
+    public function loadStartupSettings(array $pageSettings): PaginationInterface
     {
-        foreach ($settings as $key => $value) {
+        foreach ($pageSettings as $key => $value) {
             if (property_exists($this, $key)) {
                 $this->setProperty($key, $value);
             }
@@ -266,11 +280,14 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Get the limit per page offset (for SQL LIMIT statement).
      *
-     * @return array
+     * @param \Closure $overridePerPageOffset A Closure to render.
+     * @param int      $newPage               A new page number.
+     *
+     * @return array The Per-Page offset as Array: [(int) 1, (int) 20]
      *
      * @api
      */
-    public function getLimitPerPageOffset(\Closure $overridePerPageOffset = null, $newPage = null)
+    public function getLimitPerPageOffset(\Closure $overridePerPageOffset = null, int $newPage = null): array
     {
         $offset = $this->setPageOffset()->getPageOffset();
 
@@ -300,26 +317,26 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     //--------------------------------------------------------------------------
 
     /**
-     * Recalculates any updated settings parameter.
+     * Recalculates any updated $pageSettings parameter.
      *
      * Buisiness rules expected on setup:
      *    $this->itemsPerPage can never be < 1
      *    $this->maxPagesToShow can never be < 3
      *    $this->currentPageNumber can never be < 1
      *
-     * @param array $settings  A list of per page settings.
+     * @param array $pageSettings  A list of per page settings.
      *
      * @return PaginationInterface The current instance
      *
-     * @throws \InvalidArgumentException if $settings is null.
+     * @throws \InvalidArgumentException if $pageSettings is null.
      *
      * @api
      */
-    public function recalculate(array $settings): PaginationInterface
+    public function recalculate(array $pageSettings): PaginationInterface
     {
         $this->limitPerPageOffset instanceof \Closure
             ?: $this->throwExceptionError([__METHOD__, __CLASS__, 'LimitPerPageOffset callback not found, set it using Paginator::setLimitPerPageOffset()', 'A105']);
-        foreach ($settings as $key => $value) {
+        foreach ($pageSettings as $key => $value) {
             if (property_exists($this, $key)) {
                 $this->setProperty($key, $value);
             }
@@ -490,9 +507,9 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function setUrlPattern($urlPattern): PaginationInterface
+    public function setUrlPattern(string $urlPattern): PaginationInterface
     {
-        return $this->setProperty('urlPattern', (string) $urlPattern);
+        return $this->setProperty('urlPattern', $urlPattern);
     }
 
     //--------------------------------------------------------------------------

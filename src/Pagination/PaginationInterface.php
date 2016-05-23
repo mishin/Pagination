@@ -16,7 +16,11 @@ namespace UCSDMath\Pagination;
 /**
  * PaginationInterface is the interface implemented by all Pagination classes.
  *
+ * Method noted as: (+) @api.
+ *
  * @author Daryl Eisner <deisner@ucsd.edu>
+ *
+ * @api
  */
 interface PaginationInterface
 {

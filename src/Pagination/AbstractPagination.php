@@ -104,7 +104,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Constants.
      *
-     * @var string VERSION  A version number
+     * @var string VERSION A version number
      *
      * @api
      */

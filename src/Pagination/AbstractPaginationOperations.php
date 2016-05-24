@@ -14,16 +14,30 @@ declare(strict_types=1);
 namespace UCSDMath\Pagination;
 
 /**
- * AbstractPaginationOperations is the default implementation of {@link AbstractPaginationOperationsInterface} which
- * provides routine database methods that are commonly used in frameworks.
+ * AbstractPaginationOperations provides an abstract base class implementation of {@link AbstractPagination}.
+ * This service groups a common code base implementation that Pagination extends.
  *
- * Method noted as: (+) @api, (-) protected or private visibility.
+ * Method list: (+) @api, (-) protected or private visibility.
  *
  * (+) PaginationInterface __construct();
+ * (+) void __destruct();
+ * (+) int getNextUrl();
+ * (+) int getPrevUrl();
+ * (+) int getNextPage();
+ * (+) int getNumPages();
+ * (+) int getPrevPage();
+ * (+) int getTotalItems();
+ * (+) int getItemsPerPage();
+ * (+) int getMaxPagesToShow();
+ * (+) int getCurrentPageNumber();
+ * (+) int getCurrentPageLastItem();
+ * (+) int getCurrentPageFirstItem();
+ * (+) PaginationInterface setTotalItems(int $totalItems);
+ * (+) PaginationInterface setItemsPerPage(int $itemsPerPage);
+ * (+) PaginationInterface setCurrentPageNumber(int $currentPageNumber = null);
+ * (-) array getAsArrayListingPages(int $slidingStart, int $slidingEnd);
  *
  * @author Daryl Eisner <deisner@ucsd.edu>
- *
- * @api
  */
 abstract class AbstractPaginationOperations extends AbstractPagination
 {

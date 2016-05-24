@@ -18,7 +18,7 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
 
 /**
  * AbstractPagination provides an abstract base class implementation of {@link PaginationInterface}.
- * Primarily, this services the fundamental implementations for all Pagination classes.
+ * This service groups a common code base implementation that Pagination extends.
  *
  * Paginator provides a process of dividing (content) into discrete pages that are
  * acceptable or desirable to the enduser.
@@ -59,43 +59,26 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
  *
  * Method list: (+) @api, (-) protected or private visibility.
  *
- * The notation below illustrates visibility: (+) @api, (-) protected or private.
- *
  * (+) PaginationInterface __construct();
  * (+) void __destruct();
+ * (+) int getPageCount();
  * (+) string __toString();
- * (+) object __call($callback, $parameters);
- * (+) array renderAsArray();
- * (+) string renderLargePaging();
- * (+) string renderCompactPaging();
+ * (+) string getUrlPattern();
  * (+) string getPageUrl($pageNumber);
- * (+) bool isValidPageNumber($page);
- * (+) int     getCurrentPageLastItem();
- * (+) int     getCurrentPageFirstItem();
+ * (+) mixed __call($callback, $parameters);
  * (+) PaginationInterface recalculate(array $pageSettings);
- * (+) array createPage($pageNumber, $isCurrentPage = false);
+ * (+) PaginationInterface setUrlPattern(string $urlPattern);
+ * (+) PaginationInterface setMaxPagesToShow(int $maxPagesToShow);
+ * (+) PaginationInterface loadStartupSettings(array $pageSettings);
  * (+) PaginationInterface setRenderAsJson(\Closure $renderAsJson);
  * (+) PaginationInterface setLimitPerPageOffset(\Closure $limitPerPageOffset);
  * (+) array getLimitPerPageOffset(\Closure $overridePerPageOffset = null, int $newPage = null);
- * (+) mixed getPrevUrl();
- * (+) int     getNextUrl();
- * (+) int     getNumPages();
- * (+) int     getNextPage();
- * (+) int     getPrevPage();
- * (+) int     getPageCount();
- * (+) string getUrlPattern();
- * (+) int     getTotalItems();
- * (+) int     getPageOffset();
- * (+) int     getItemsPerPage();
- * (+) int     getMaxPagesToShow();
- * (+) int     getCurrentPageNumber();
- * (+) PaginationInterface setPageCount();
- * (+) PaginationInterface setPageOffset();
- * (+) PaginationInterface setUrlPattern($urlPattern);
- * (+) PaginationInterface setTotalItems($totalItems);
- * (+) PaginationInterface setItemsPerPage($itemsPerPage);
- * (+) PaginationInterface setMaxPagesToShow($maxPagesToShow);
- * (+) PaginationInterface setCurrentPageNumber($currentPageNumber = null);
+ * (-) int getPageOffset();
+ * (-) bool isValidPageNumber($page);
+ * (-) PaginationInterface setPageCount();
+ * (-) PaginationInterface setPageOffset();
+ * (-) PaginationInterface normalizePageCounts();
+ * (-) array createPage($pageNumber, $isCurrentPage = false);
  *
  * @author Daryl Eisner <deisner@ucsd.edu>
  */

@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace UCSDMath\Pagination;
 
 /**
- * Pagination is the default implementation of {@link PaginationInterface} which
- * provides routine Paginator methods that are commonly used throughout the framework.
+ * Paginator is the default implementation of {@link PaginationInterface} which
+ * provides routine Paginator methods that are commonly used in the framework.
  *
  * Paginator provides a process of dividing (content) into discrete pages that are
  * acceptable or desirable to the enduser.
@@ -54,15 +54,26 @@ namespace UCSDMath\Pagination;
  *    - /sso/1/personnel/edit-search/page-(:page)/show-(:rows)/(:search)/(:sort)/
  *    - /sso/1/personnel/edit-record/page-(:page)/
  *
+ * {@link AbstractPaginationOperations} is basically a handler component of basic
+ * paging services for UCSDMath which this class extends.
+ *
  * Method list: (+) @api, (-) protected or private visibility.
  *
- * The notation below illustrates visibility: (+) @api, (-) protected or private.
- *
- * (+) PaginationInterface __construct();
+ * (+) PersistenceInterface __construct();
+ * (+) void __destruct();
+ * (+) array renderAsArray();
+ * (+) string renderLargePaging();
+ * (+) string renderCompactPaging();
+ * (-) array getAsArraySlidingRange();
+ * (-) string getLargePagingNextUrl();
+ * (-) string getLargePagingPrevUrl();
+ * (-) string getCompactPagingNextUrl();
+ * (-) string getCompactPagingPrevUrl();
+ * (-) string getLargePagingSelections();
+ * (-) string getCompactPagingSelectController();
+ * (-) string getCompactPagingContainer($containData);
  *
  * @author Daryl Eisner <deisner@ucsd.edu>
- *
- * @api
  */
 class Paginator extends AbstractPaginationOperations implements PaginationInterface
 {

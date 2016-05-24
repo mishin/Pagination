@@ -16,12 +16,17 @@ namespace UCSDMath\Pagination\Exception;
 use RuntimeException;
 
 /**
- * CallbackNotFoundException is the default implementation of {@link \RuntimeException} to
- * provide a base page number exception handling.
+ * CallbackNotFoundException is the default implementation of {@link RuntimeException} which
+ * provides routine CallbackNotFoundException methods that are commonly used in the framework.
+ *
+ * {@link AbstractEncryption} is basically a base class for various RuntimeException requirements
+ * which this class extends.  This is for Pagination.
+ *
+ * Method list: (+) @api, (-) protected or private visibility.
+ *
+ * (+) RuntimeException __construct();
  *
  * @author Daryl Eisner <deisner@ucsd.edu>
- *
- * @api
  */
 class CallbackNotFoundException extends RuntimeException
 {

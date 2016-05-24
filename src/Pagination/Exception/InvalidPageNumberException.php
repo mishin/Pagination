@@ -16,12 +16,18 @@ namespace UCSDMath\Pagination\Exception;
 use InvalidArgumentException;
 
 /**
- * InvalidPageNumberException is the default implementation of {@link InvalidArgumentException} to
- * provide a base page number exception handling.
+ * InvalidPageNumberException is the default implementation of {@link InvalidArgumentException} which
+ * provides routine Pagination Exception methods that are commonly used in the framework.
+ *
+ * {@link Pagination} is basically a helper in the process of dividing a document view into
+ * discrete pages.  This provides some Exception handling.
+ *
+ * Method list: (+) @api, (-) protected or private visibility.
+ *
+ * (+) PersistenceInterface __construct();
+ * (+) void __destruct();
  *
  * @author Daryl Eisner <deisner@ucsd.edu>
- *
- * @api
  */
 class InvalidPageNumberException extends \InvalidArgumentException
 {

@@ -97,13 +97,25 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
     /**
      * Constructor.
      *
-     * @param array  $settings  A associated list of page settings.
+     * @param array $settings A associated list of page settings.
      *
      * @api
      */
     public function __construct(array $settings = null)
     {
         parent::__construct($settings);
+    }
+
+    //--------------------------------------------------------------------------
+
+    /**
+     * Destructor.
+     *
+     * @api
+     */
+    public function __destruct()
+    {
+        parent::__destruct();
     }
 
     //--------------------------------------------------------------------------

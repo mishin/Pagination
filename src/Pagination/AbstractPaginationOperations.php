@@ -73,6 +73,18 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     //--------------------------------------------------------------------------
 
     /**
+     * Destructor.
+     *
+     * @api
+     */
+    public function __destruct()
+    {
+        parent::__destruct();
+    }
+
+    //--------------------------------------------------------------------------
+
+    /**
      * Abstract Method Requirements.
      */
     abstract public function renderAsArray();

@@ -98,24 +98,24 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Properties.
      *
-     * @var    int                 $pageCount            A number of pages to render (e.g., a calculation) (e.g., 780)
-     * @var    int                 $totalItems           A total number of found records in table (e.g., 8500)
-     * @var    int                 $pageOffset           A interger used to define our SQL OFFSET (e.g., 60)
-     * @var    string              $urlPattern           A default url with placeholders (e.g., '/sso/1/news/(:page)/(:rows)/(:search)/')
-     * @var    string              $sortPattern          A default sort url pattern (:sort) (e.g., 'group-lastname-firstname')
-     * @var    int                 $itemsPerPage         A display setting showing a number of records per page (e.g., 15)
-     * @var    int                 $maxPagesToShow       A maximum number of pages for the <select> menu (e.g., 10)
-     * @var    string              $searchPattern        A search pattern used in the url (:search) (e.g., 'dillon-or-drop')
-     * @var    int                 $currentPageNumber    A current page number (e.g., 8)
-     * @var    \Closure            $renderAsJson         A closure callback for encoding json data
-     * @var    \Closure            $limitPerPageOffset   A closure callback for the limit offset
-     * @var    bool                $isUrlPatternUsed     A boolean option that enables the pattern type
-     * @var    bool                $isSortPatternUsed    A boolean option that enables the pattern type
-     * @var    bool                $isItemsPerPageUsed   A boolean option that enables the pattern type
-     * @var    bool                $isSearchPatternUsed  A boolean option that enables the pattern type
-     * @var    array               $storageRegister      A set of validation stored data elements
-     * @static PaginationInterface $instance             A PaginationInterface
-     * @static int                 $objectCount          A PaginationInterface count
+     * @var    int                 $pageCount           A number of pages to render (e.g., a calculation) (e.g., 780)
+     * @var    int                 $totalItems          A total number of found records in table (e.g., 8500)
+     * @var    int                 $pageOffset          A interger used to define our SQL OFFSET (e.g., 60)
+     * @var    string              $urlPattern          A default url with placeholders (e.g., '/sso/1/news/(:page)/(:rows)/(:search)/')
+     * @var    string              $sortPattern         A default sort url pattern (:sort) (e.g., 'group-lastname-firstname')
+     * @var    int                 $itemsPerPage        A display setting showing a number of records per page (e.g., 15)
+     * @var    int                 $maxPagesToShow      A maximum number of pages for the <select> menu (e.g., 10)
+     * @var    string              $searchPattern       A search pattern used in the url (:search) (e.g., 'dillon-or-drop')
+     * @var    int                 $currentPageNumber   A current page number (e.g., 8)
+     * @var    \Closure            $renderAsJson        A closure callback for encoding json data
+     * @var    \Closure            $limitPerPageOffset  A closure callback for the limit offset
+     * @var    bool                $isUrlPatternUsed    A boolean option that enables the pattern type
+     * @var    bool                $isSortPatternUsed   A boolean option that enables the pattern type
+     * @var    bool                $isItemsPerPageUsed  A boolean option that enables the pattern type
+     * @var    bool                $isSearchPatternUsed A boolean option that enables the pattern type
+     * @static PaginationInterface $instance            A static instance PaginationInterface
+     * @static int                 $objectCount         A static count of PaginationInterface
+     * @var    array               $storageRegister     A stored set of data structures used by this class
      */
     protected $pageCount = null;
     protected $totalItems = null;
@@ -132,14 +132,14 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     protected $isSortPatternUsed = false;
     protected $isItemsPerPageUsed = false;
     protected $isSearchPatternUsed = false;
-    protected $storageRegister = array();
-    protected static $instance = null;
-    protected static $objectCount = 0;
     protected $renderPageEllipsis = [
-        'pageUrl' => null,
+        'pageUrl'       => null,
         'isCurrentPage' => false,
-        'pageNumber' => self::NAVIGATION_ELLIPSES,
+        'pageNumber'    => self::NAVIGATION_ELLIPSES,
     ];
+    protected static $instance    = null;
+    protected static $objectCount = 0;
+    protected $storageRegister    = [];
 
     //--------------------------------------------------------------------------
 
@@ -158,7 +158,6 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     public function __construct(array $pageSettings)
     {
         $this->loadStartupSettings($pageSettings);
-
         /* Callback to {$limitPerPageOffset} for Page Override. */
         $this->setLimitPerPageOffset(function($currentPageNumber) use (&$pageSettings) {
             $offset = $this->setPageOffset()->getPageOffset() + ($currentPageNumber * $this->itemsPerPage);

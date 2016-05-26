@@ -323,7 +323,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
      */
     protected function getAsArrayListingPages(int $slidingStart, int $slidingEnd): array
     {
-        $pages = array();
+        $pages = [];
         $pages[] = $this->createPage(1, (int) $this->currentPageNumber === 1);
         if ($slidingStart > 2) {
             $pages[] = $this->renderPageEllipsis;

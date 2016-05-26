@@ -306,7 +306,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
      */
     public function renderAsArray(): array
     {
-        $pages = array();
+        $pages = [];
         if ($this->pageCount <= 1) {
             return $pages;
         }

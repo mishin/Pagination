@@ -164,7 +164,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
             return [$offset, $this->itemsPerPage];
         });
         $this->setPageCount()->setCurrentPageNumber();
-        static::$instance = $this;
+        static::$instance = new static;
         static::$objectCount++;
     }
 

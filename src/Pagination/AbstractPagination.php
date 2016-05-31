@@ -35,10 +35,10 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
  *    $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
  *    $itemsPerPage = 4;
  *
- *    $totalItems = "SELECT COUNT(*) FROM personnel;
+ *    $totalRecordCount = "SELECT COUNT(*) FROM personnel;
  *    $rowCount   = "SELECT COUNT(*) FROM personnel where group = 'faculty';
  *
- *    if ($totalItems === 0) { print 'No records exist in the database.';}
+ *    if ($totalRecordCount === 0) { print 'No records exist in the database.';}
  *    if ($rowCount === 0)   { print 'No records found in database with you exact match.';}
  *
  *    $pageCount = (int) ceil($rowCount / $itemsPerPage);
@@ -99,7 +99,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * Properties.
      *
      * @var    int                 $pageCount           A number of pages to render (e.g., a calculation) (e.g., 780)
-     * @var    int                 $totalItems          A total number of found records in table (e.g., 8500)
+     * @var    int                 $totalRecordCount    A total number of found records in table (e.g., 8500)
      * @var    int                 $pageOffset          A interger used to define our SQL OFFSET (e.g., 60)
      * @var    string              $urlPattern          A default url with placeholders (e.g., '/sso/1/news/(:page)/(:rows)/(:search)/')
      * @var    string              $sortPattern         A default sort url pattern (:sort) (e.g., 'group-lastname-firstname')
@@ -118,7 +118,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * @var    array               $storageRegister     A stored set of data structures used by this class
      */
     protected $pageCount = null;
-    protected $totalItems = null;
+    protected $totalRecordCount = null;
     protected $pageOffset = null;
     protected $urlPattern = null;
     protected $sortPattern = null;
@@ -172,7 +172,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * Load Settings into assigned properties.
      *
      * Example of array items:
-     *    'totalItems'          => (int) 1082
+     *    'totalRecordCount'    => (int) 1082
      *    'itemsPerPage'        => (int) 20
      *    'currentPageNumber'   => (int) 5
      *    'maxPagesToShow'      => (int) 10
@@ -445,7 +445,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     {
         return ((int) $this->itemsPerPage === 0)
             ? $this->setProperty('pageCount', 0)
-            : $this->setProperty('pageCount', (int) ceil((int) $this->totalItems / (int) $this->itemsPerPage));
+            : $this->setProperty('pageCount', (int) ceil((int) $this->totalRecordCount / (int) $this->itemsPerPage));
     }
 
     //--------------------------------------------------------------------------

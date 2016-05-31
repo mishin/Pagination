@@ -156,13 +156,13 @@ interface PaginationInterface
     /**
      * Set the total number of records in total.
      *
-     * @param int $totalItems  A number of total records in database
+     * @param int $totalRecordCount  A number of total records in database
      *
      * @return PaginationInterface The current interface
      *
      * @api
      */
-    public function setTotalItems(int $totalItems): PaginationInterface;
+    public function setTotalRecordCount(int $totalRecordCount): PaginationInterface;
 
     //--------------------------------------------------------------------------
 
@@ -173,7 +173,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function getTotalItems(): int;
+    public function getTotalRecordCount(): int;
 
     //--------------------------------------------------------------------------
 

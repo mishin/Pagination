@@ -26,13 +26,13 @@ namespace UCSDMath\Pagination;
  * (+) int getNextPage();
  * (+) int getNumPages();
  * (+) int getPrevPage();
- * (+) int getTotalItems();
+ * (+) int getTotalRecordCount();
  * (+) int getItemsPerPage();
  * (+) int getMaxPagesToShow();
  * (+) int getCurrentPageNumber();
  * (+) int getCurrentPageLastItem();
  * (+) int getCurrentPageFirstItem();
- * (+) PaginationInterface setTotalItems(int $totalItems);
+ * (+) PaginationInterface setTotalRecordCount(int $totalRecordCount);
  * (+) PaginationInterface setItemsPerPage(int $itemsPerPage);
  * (+) PaginationInterface setCurrentPageNumber(int $currentPageNumber = null);
  * (-) array getAsArrayListingPages(int $slidingStart, int $slidingEnd);
@@ -104,7 +104,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     {
         $first = ((int) $this->currentPageNumber - 1) * (int) $this->itemsPerPage + 1;
 
-        return $first > (int) $this->totalItems ? null : $first;
+        return $first > (int) $this->totalRecordCount ? null : $first;
     }
 
     //--------------------------------------------------------------------------
@@ -124,7 +124,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
         }
         $last = $first + (int) $this->itemsPerPage - 1;
 
-        return ($last > (int) $this->totalItems) ? (int) $this->totalItems : $last;
+        return ($last > (int) $this->totalRecordCount) ? (int) $this->totalRecordCount : $last;
     }
 
     //--------------------------------------------------------------------------
@@ -213,15 +213,15 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Set the total number of records in total.
      *
-     * @param int $totalItems  A number of total records in database
+     * @param int $totalRecordCount  A number of total records in database
      *
      * @return PaginationInterface The current instance
      *
      * @api
      */
-    public function setTotalItems(int $totalItems): PaginationInterface
+    public function setTotalRecordCount(int $totalRecordCount): PaginationInterface
     {
-        $this->setProperty('totalItems', $totalItems);
+        $this->setProperty('totalRecordCount', $totalRecordCount);
         $this->updateNumPages();
 
         return $this;
@@ -236,9 +236,9 @@ abstract class AbstractPaginationOperations extends AbstractPagination
      *
      * @api
      */
-    public function getTotalItems(): int
+    public function getTotalRecordCount(): int
     {
-        return (int) $this->getProperty('totalItems');
+        return (int) $this->getProperty('totalRecordCount');
     }
 
     //--------------------------------------------------------------------------

@@ -32,10 +32,10 @@ namespace UCSDMath\Pagination;
  *    $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
  *    $itemsPerPage = 4;
  *
- *    $totalItems = "SELECT COUNT(*) FROM personnel;
+ *    $totalRecordCount = "SELECT COUNT(*) FROM personnel;
  *    $rowCount   = "SELECT COUNT(*) FROM personnel where group = 'faculty';
  *
- *    if ($totalItems === 0) { print 'No records exist in the database.';}
+ *    if ($totalRecordCount === 0) { print 'No records exist in the database.';}
  *    if ($rowCount === 0)   { print 'No records found in database with you exact match.';}
  *
  *    $pageCount = (int) ceil($rowCount / $itemsPerPage);

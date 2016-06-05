@@ -206,7 +206,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Set the maximum pages to display.
      *
-     * @param int $maxPagesToShow  A number of pages to display.
+     * @param int $maxPagesToShow A number of pages to display.
      *
      * @return PaginationInterface The current instance
      *
@@ -282,8 +282,8 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * Forward to any callable, including anonymous functions
      * (or any instances of \Closure).
      *
-     * @param string $callback    A named callable to be called.
-     * @param mixed  $parameters  A parameter set to be passed to the callback (as an indexed array).
+     * @param string $callback   A named callable to be called.
+     * @param mixed  $parameters A parameter set to be passed to the callback (as an indexed array).
      *
      * @return mixed  the return value of the callback, or false on error.
      *
@@ -304,7 +304,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *    $this->maxPagesToShow can never be < 3
      *    $this->currentPageNumber can never be < 1
      *
-     * @param array $pageSettings  A list of per page settings.
+     * @param array $pageSettings A list of per page settings.
      *
      * @return PaginationInterface The current instance
      *
@@ -332,7 +332,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Get the page url.
      *
-     * @param int $pageNumber  A page number for the url pattern
+     * @param int $pageNumber A page number for the url pattern
      *
      * @return string
      *
@@ -359,8 +359,8 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Create a page data structure.
      *
-     * @param int  $pageNumber     A page number for data structure
-     * @param bool $isCurrentPage  A boolean if is the current page
+     * @param int  $pageNumber    A page number for data structure
+     * @param bool $isCurrentPage A boolean if is the current page
      *
      * @return array
      */
@@ -467,7 +467,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Determine if the given value is a valid page number.
      *
-     * @param int  $page  A page number.
+     * @param int  $page A page number.
      *
      * @return bool
      */
@@ -481,7 +481,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Set the url pattern for rendering pagination (scheme).
      *
-     * @param string $urlPattern  A base SEO url pattern
+     * @param string $urlPattern A base SEO url pattern
      *
      * @return PaginationInterface The current instance
      *

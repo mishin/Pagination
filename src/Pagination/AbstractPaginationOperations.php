@@ -146,7 +146,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Set the current page number.
      *
-     * @param int $currentPageNumber  A current page number.
+     * @param int $currentPageNumber A current page number.
      *
      * @return PaginationInterface The current instance
      *
@@ -180,7 +180,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Set the number of items (records) per page.
      *
-     * @param int $itemsPerPage  A number of items per page
+     * @param int $itemsPerPage A number of items per page
      *
      * @return PaginationInterface The current instance
      *
@@ -213,7 +213,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Set the total number of records in total.
      *
-     * @param int $totalRecordCount  A number of total records in database
+     * @param int $totalRecordCount A number of total records in database
      *
      * @return PaginationInterface The current instance
      *

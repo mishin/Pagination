@@ -49,10 +49,10 @@ namespace UCSDMath\Pagination;
  *    SQL looks like:  SELECT * FROM personnel LIMIT 4,4
  *
  * Consider some common url patterns:
- *    - /sso/1/personnel/(:page)/(:rows)/(:sort)/
- *    - /sso/1/personnel/quick-search/(:page)/(:rows)/(:search)/(:sort)/
- *    - /sso/1/personnel/edit-search/page-(:page)/show-(:rows)/(:search)/(:sort)/
- *    - /sso/1/personnel/edit-record/page-(:page)/
+ *    - /sso/1/personnel/(:pageNumber)/(:itemsPerPage)/(:sortPattern)/
+ *    - /sso/1/personnel/quick-search/(:pageNumber)/(:itemsPerPage)/(:searchPattern)/(:sortPattern)/
+ *    - /sso/1/personnel/edit-search/page-(:pageNumber)/show-(:itemsPerPage)/(:searchPattern)/(:sortPattern)/
+ *    - /sso/1/personnel/edit-record/page-(:pageNumber)/
  *
  * {@link AbstractPaginationOperations} is basically a handler component of basic
  * paging services for UCSDMath which this class extends.
@@ -204,7 +204,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
      *
      * @return string
      */
-    protected function getCompactPagingContainer($containData): string
+    protected function getCompactPagingContainer(string $containData): string
     {
         $html = $this->isItemsPerPageUsed
             ? sprintf('%s<!-- paging controls -->%s<div class="%s">%s', "\n", "\n", 'paging-container', "\n")

@@ -27,18 +27,18 @@ interface PaginationInterface
     /**
      * Constants.
      */
-    const BASE_PAGE = 1;
-    const CHARSET = 'UTF-8';
-    const REQUIRED_PHP_VERSION = '7.0.0';
-    const PAGE_PLACEHOLDER   = '(:page)';
-    const ROWS_PLACEHOLDER   = '(:rows)';
-    const SORT_PLACEHOLDER   = '(:sort)';
-    const SEARCH_PLACEHOLDER = '(:search)';
-    const TITLE_PREV = 'Select the next page';
-    const TITLE_NEXT = 'Select the previous page';
-    const NAVIGATION_ARROW_PREV = '&#10094;&#160;Prev';
-    const NAVIGATION_ARROW_NEXT = 'Next&#160;&#10095;';
-    const NAVIGATION_ELLIPSES   = '&#183;&#160;&#183;&#160;&#183;';
+    const BASE_PAGE                  = 1;
+    const CHARSET                    = 'UTF-8';
+    const REQUIRED_PHP_VERSION       = '7.0.0';
+    const PLACEHOLDER_PAGE_NUMBER    = '(:pageNumber)';
+    const PLACEHOLDER_ITEMS_PER_PAGE = '(:itemsPerPage)';
+    const PLACEHOLDER_SORT_PATTERN   = '(:sortPattern)';
+    const PLACEHOLDER_SEARCH_PATTERN = '(:searchPattern)';
+    const TITLE_PREV                 = 'Select the next page';
+    const TITLE_NEXT                 = 'Select the previous page';
+    const NAVIGATION_ARROW_PREV      = '&#10094;&#160;Prev';
+    const NAVIGATION_ARROW_NEXT      = 'Next&#160;&#10095;';
+    const NAVIGATION_ELLIPSES        = '&#183;&#160;&#183;&#160;&#183;';
 
     //--------------------------------------------------------------------------
 
@@ -71,7 +71,7 @@ interface PaginationInterface
     /**
      * Set the maximum pages to display.
      *
-     * @param int $maxPagesToShow  A number of pages to display.
+     * @param int $maxPagesToShow A number of pages to display.
      *
      * @return PaginationInterface The current interface
      *
@@ -215,7 +215,7 @@ interface PaginationInterface
     /**
      * Get the page url.
      *
-     * @param int $pageNumber  A page number for the url pattern
+     * @param int $pageNumber A page number for the url pattern
      *
      * @return string
      *

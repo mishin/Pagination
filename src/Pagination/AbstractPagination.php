@@ -52,10 +52,10 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
  *    SQL looks like:  SELECT * FROM personnel LIMIT 4,4
  *
  * Consider some common url patterns:
- *    - /sso/1/personnel/(:page)/(:rows)/(:sort)/
- *    - /sso/1/personnel/quick-search/(:page)/(:rows)/(:search)/(:sort)/
- *    - /sso/1/personnel/edit-search/page-(:page)/show-(:rows)/(:search)/(:sort)/
- *    - /sso/1/personnel/edit-record/page-(:page)/
+ *    - /sso/1/personnel/(:pageNumber)/(:itemsPerPage)/(:sortPattern)/
+ *    - /sso/1/personnel/quick-search/(:pageNumber)/(:itemsPerPage)/(:searchPattern)/(:sortPattern)/
+ *    - /sso/1/personnel/edit-search/page-(:pageNumber)/show-(:itemsPerPage)/(:searchPattern)/(:sortPattern)/
+ *    - /sso/1/personnel/edit-record/page-(:pageNumber)/
  *
  * Method list: (+) @api, (-) protected or private visibility.
  *
@@ -101,11 +101,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * @var    int                 $pageCount           A number of pages to render (e.g., a calculation) (e.g., 780)
      * @var    int                 $totalRecordCount    A total number of found records in table (e.g., 8500)
      * @var    int                 $pageOffset          A interger used to define our SQL OFFSET (e.g., 60)
-     * @var    string              $urlPattern          A default url with placeholders (e.g., '/sso/1/news/(:page)/(:rows)/(:search)/')
-     * @var    string              $sortPattern         A default sort url pattern (:sort) (e.g., 'group-lastname-firstname')
+     * @var    string              $urlPattern          A default url with placeholders (e.g., '/sso/1/news/(:pageNumber)/(:itemsPerPage)/(:searchPattern)/')
+     * @var    string              $sortPattern         A default sort url pattern (:sortPattern) (e.g., 'group-lastname-firstname')
      * @var    int                 $itemsPerPage        A display setting showing a number of records per page (e.g., 15)
      * @var    int                 $maxPagesToShow      A maximum number of pages for the <select> menu (e.g., 10)
-     * @var    string              $searchPattern       A search pattern used in the url (:search) (e.g., 'dillon-or-drop')
+     * @var    string              $searchPattern       A search pattern used in the url (:searchPattern) (e.g., 'dillon-or-drop')
      * @var    int                 $currentPageNumber   A current page number (e.g., 8)
      * @var    \Closure            $renderAsJson        A closure callback for encoding json data
      * @var    \Closure            $limitPerPageOffset  A closure callback for the limit offset
@@ -147,6 +147,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * Constructor.
      *
      * Business rules expected on setup:
+     *
      *    $this->itemsPerPage can never be < 1
      *    $this->maxPagesToShow can never be < 3
      *    $this->currentPageNumber can never be < 1
@@ -176,7 +177,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *    'itemsPerPage'        => (int) 20
      *    'currentPageNumber'   => (int) 5
      *    'maxPagesToShow'      => (int) 10
-     *    'urlPattern'          => (string) '/sso/1/course-petitions/edit-record/(:page)/(:rows)/(:search)/(:sort)/'
+     *    'urlPattern'          => (string) '/sso/1/course-petitions/edit-record/(:pageNumber)/(:itemsPerPage)/(:searchPattern)/(:sortPattern)/'
      *    'sortPattern'         => (string) 'primary_group_select-lastname-firstname'
      *    'searchPattern'       => (string) 'dillon-and-drop'
      *    'isUrlPatternUsed'    => (bool) true
@@ -238,7 +239,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     //--------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Set closure for limitPerPageOffset.
+     *
+     * @param \Closure $limitPerPageOffset A closure that creates limitPerPageOffset.
+     *
+     * @return PaginationInterface The current instance
+     *
+     * @api
      */
     public function setLimitPerPageOffset(\Closure $limitPerPageOffset): PaginationInterface
     {
@@ -248,7 +255,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     //--------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Set closure for renderAsJson.
+     *
+     * @param \Closure $renderAsJson A closure that creates renderAsJson.
+     *
+     * @return PaginationInterface The current instance
+     *
+     * @api
      */
     public function setRenderAsJson(\Closure $renderAsJson): PaginationInterface
     {
@@ -340,16 +353,16 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      */
     public function getPageUrl($pageNumber): string
     {
-        $url = str_replace(self::PAGE_PLACEHOLDER, (int) $pageNumber, $this->urlPattern);
+        $url = str_replace(self::PLACEHOLDER_PAGE_NUMBER, (int) $pageNumber, $this->urlPattern);
         $url = $this->isItemsPerPageUsed
-            ? str_replace(self::ROWS_PLACEHOLDER, (int) $this->itemsPerPage, $url)
-            : str_replace(self::ROWS_PLACEHOLDER . '/', null, $url);
-        $url = $this->isSortPatternUsed
-            ? str_replace(self::SORT_PLACEHOLDER, (string) $this->sortPattern, $url)
-            : str_replace(self::SORT_PLACEHOLDER . '/', null, $url);
+            ? str_replace(self::PLACEHOLDER_ITEMS_PER_PAGE, (int) $this->itemsPerPage, $url)
+            : str_replace(self::PLACEHOLDER_ITEMS_PER_PAGE . '/', null, $url);
         $url = $this->isSearchPatternUsed
-            ? str_replace(self::SEARCH_PLACEHOLDER, (string) $this->searchPattern, $url)
-            : str_replace(self::SEARCH_PLACEHOLDER . '/', null, $url);
+            ? str_replace(self::PLACEHOLDER_SEARCH_PATTERN, (string) $this->searchPattern, $url)
+            : str_replace(self::PLACEHOLDER_SEARCH_PATTERN . '/', null, $url);
+        $url = $this->isSortPatternUsed
+            ? str_replace(self::PLACEHOLDER_SORT_PATTERN, (string) $this->sortPattern, $url)
+            : str_replace(self::PLACEHOLDER_SORT_PATTERN . '/', null, $url);
 
         return $url;
     }
@@ -376,9 +389,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     //--------------------------------------------------------------------------
 
     /**
-     * {@inheritdoc}
+     * Render compact paging as default option.
+     *
+     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->renderCompactPaging();
     }
@@ -467,7 +482,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     /**
      * Determine if the given value is a valid page number.
      *
-     * @param int  $page A page number.
+     * @param int $page A page number.
      *
      * @return bool
      */

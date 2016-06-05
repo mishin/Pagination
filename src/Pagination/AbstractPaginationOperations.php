@@ -96,7 +96,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Get the next page number.
      *
-     * @return int
+     * @return int|null
      *
      * @api
      */

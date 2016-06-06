@@ -45,7 +45,7 @@ interface PaginationInterface
     /**
      * Recalculates any updated settings parameter.
      *
-     * @param array $settings A list of per page settings.
+     * @param array $settings The list of per page settings.
      *
      * @return PaginationInterface The current interface
      *
@@ -71,7 +71,7 @@ interface PaginationInterface
     /**
      * Set the maximum pages to display.
      *
-     * @param int $maxPagesToShow A number of pages to display.
+     * @param int $maxPagesToShow The number of pages to display.
      *
      * @return PaginationInterface The current interface
      *
@@ -108,7 +108,7 @@ interface PaginationInterface
     /**
      * Set the current page number.
      *
-     * @param int $currentPageNumber A current page number.
+     * @param int $currentPageNumber The current page number.
      *
      * @return PaginationInterface The current interface
      *
@@ -132,7 +132,7 @@ interface PaginationInterface
     /**
      * Set the number of items (records) per page.
      *
-     * @param int $itemsPerPage A number of items per page
+     * @param int $itemsPerPage The number of items per page
      *
      * @return PaginationInterface The current interface
      *
@@ -156,7 +156,7 @@ interface PaginationInterface
     /**
      * Set the total number of records in total.
      *
-     * @param int $totalRecordCount A number of total records in database
+     * @param int $totalRecordCount The number of total records in database
      *
      * @return PaginationInterface The current interface
      *
@@ -191,7 +191,7 @@ interface PaginationInterface
     /**
      * Set the url pattern for rendering pagination (scheme).
      *
-     * @param string $urlPattern A base SEO url pattern
+     * @param string $urlPattern The base SEO url pattern
      *
      * @return PaginationInterface The current interface
      *
@@ -215,7 +215,7 @@ interface PaginationInterface
     /**
      * Get the page url.
      *
-     * @param int $pageNumber A page number for the url pattern
+     * @param int $pageNumber The page number for the url pattern
      *
      * @return string
      *

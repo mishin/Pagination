@@ -80,7 +80,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
     /**
      * Constants.
      *
-     * @var string VERSION A version number
+     * @var string VERSION The version number
      *
      * @api
      */
@@ -97,7 +97,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
     /**
      * Constructor.
      *
-     * @param array $settings A associated list of page settings.
+     * @param array $settings The associated list of page settings.
      *
      * @api
      */
@@ -200,7 +200,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
     /**
      * Create a page data structure.
      *
-     * @param string $containData A set of controls to contain (HTML)
+     * @param string $containData The set of controls to contain (HTML)
      *
      * @return string
      */

@@ -44,7 +44,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Constants.
      *
-     * @var string VERSION A version number
+     * @var string VERSION The version number
      *
      * @api
      */
@@ -61,7 +61,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Constructor.
      *
-     * @param array $settings A associated list of page settings.
+     * @param array $settings The associated list of page settings.
      *
      * @api
      */
@@ -146,7 +146,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Set the current page number.
      *
-     * @param int $currentPageNumber A current page number.
+     * @param int $currentPageNumber The current page number.
      *
      * @return PaginationInterface The current instance
      *
@@ -180,7 +180,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Set the number of items (records) per page.
      *
-     * @param int $itemsPerPage A number of items per page
+     * @param int $itemsPerPage The number of items per page
      *
      * @return PaginationInterface The current instance
      *
@@ -213,7 +213,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Set the total number of records in total.
      *
-     * @param int $totalRecordCount A number of total records in database
+     * @param int $totalRecordCount The number of total records in database
      *
      * @return PaginationInterface The current instance
      *
@@ -316,8 +316,8 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Build the list of pages.
      *
-     * @param int $slidingStart A sliding start number
-     * @param int $slidingEnd   A sliding end number
+     * @param int $slidingStart The sliding start number
+     * @param int $slidingEnd   The sliding end number
      *
      * @return array
      */

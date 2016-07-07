@@ -160,7 +160,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
     {
         $this->loadStartupSettings($pageSettings);
         /* Callback to {$limitPerPageOffset} for Page Override. */
-        $this->setLimitPerPageOffset(function($currentPageNumber) use (&$pageSettings) {
+        $this->setLimitPerPageOffset(function ($currentPageNumber) use (&$pageSettings) {
             $offset = $this->setPageOffset()->getPageOffset() + ($currentPageNumber * $this->itemsPerPage);
             return [$offset, $this->itemsPerPage];
         });

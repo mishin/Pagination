@@ -9,8 +9,8 @@
         <a href="https://travis-ci.org/ucsdmath/Pagination">
         <img src="https://travis-ci.org/ucsdmath/Pagination.svg?branch=master" style="float: left; margin: 0px 0px 10px 10px;"></a></td>
     <td width="250" align="center">
-        <a href="https://insight.sensiolabs.com/projects/888888888888">
-        <img src="https://insight.sensiolabs.com/projects/8888888888888/big.png" style="float: right; margin: 0px 0px 10px 10px;" width="212" height="51"></a></td>
+        <a href="https://insight.sensiolabs.com/projects/581d0596-5e47-47e7-8ffc-49ded4a89f32">
+        <img src="https://insight.sensiolabs.com/projects/581d0596-5e47-47e7-8ffc-49ded4a89f32/big.png" style="float: right; margin: 0px 0px 10px 10px;" width="212" height="51"></a></td>
     <td width="180" align="center">
         <a href="https://www.versioneye.com/php/ucsdmath:pagination">
         <img src="https://www.versioneye.com/php/ucsdmath:pagination/badge.png?branch=master" style="float: left; margin: 0px 0px 10px 10px;"></a><br>

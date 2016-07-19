@@ -11,8 +11,8 @@
         <a href="https://www.codacy.com/app/ucsdmath-project/Pagination">
         <img src="https://api.codacy.com/project/badge/Grade/712cf72f522447e88528886b9d02448c"></a></td>
     <td width="250" align="center">
-        <a href="https://insight.sensiolabs.com/projects/581d0596-5e47-47e7-8ffc-49ded4a89f32">
-        <img src="https://insight.sensiolabs.com/projects/581d0596-5e47-47e7-8ffc-49ded4a89f32/big.png" style="float: right; margin: 0px 0px 10px 10px;" width="212" height="51"></a></td>
+        <a href="https://insight.sensiolabs.com/projects/4697add0-76b8-48d1-98bb-aa24eb472d5c">
+        <img src="https://insight.sensiolabs.com/projects/4697add0-76b8-48d1-98bb-aa24eb472d5c/big.png" style="float: right; margin: 0px 0px 10px 10px;" width="212" height="51"></a></td>
     <td width="180" align="center">
         <a href="https://www.versioneye.com/user/projects/577fba905bb1390040177bcc">
         <img src="https://www.versioneye.com/user/projects/577fba905bb1390040177bcc/badge.png?style=flat" style="float:left;margin:0px 0px 10px 10px;"></a><br>

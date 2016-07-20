@@ -189,7 +189,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     public function setItemsPerPage(int $itemsPerPage): PaginationInterface
     {
         $this->setProperty('itemsPerPage', $itemsPerPage);
-        $this->updateNumPages();
+        $this->setPageCount();
 
         return $this;
     }
@@ -222,7 +222,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     public function setTotalRecordCount(int $totalRecordCount): PaginationInterface
     {
         $this->setProperty('totalRecordCount', $totalRecordCount);
-        $this->updateNumPages();
+        $this->setPageCount();
 
         return $this;
     }

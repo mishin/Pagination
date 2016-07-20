@@ -101,7 +101,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
      *
      * @api
      */
-    public function __construct(array $settings = null)
+    public function __construct(array $settings)
     {
         parent::__construct($settings);
     }

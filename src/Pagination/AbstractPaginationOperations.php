@@ -65,7 +65,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
      *
      * @api
      */
-    public function __construct(array $settings = null)
+    public function __construct(array $settings)
     {
         parent::__construct($settings);
     }

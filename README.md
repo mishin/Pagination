@@ -17,7 +17,7 @@
         <a href="https://www.versioneye.com/user/projects/577fba905bb1390040177bcc">
         <img src="https://www.versioneye.com/user/projects/577fba905bb1390040177bcc/badge.png?style=flat" style="float:left;margin:0px 0px 10px 10px;"></a><br>
         <a href="https://codeclimate.com/github/ucsdmath/Pagination">
-        <img src="https://codeclimate.com/github/ucsdmath/Pagination/badges/gpa.svg"></a>
+        <img src="https://codeclimate.com/github/ucsdmath/Pagination/badges/gpa.svg"></a><br>
         <a href="https://travis-ci.org/ucsdmath/Pagination">
         <img src="http://php7ready.timesplinter.ch/ucsdmath/Pagination/badge.svg"></a>
 </td></tr></table></td></tr></table>

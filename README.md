@@ -9,7 +9,12 @@
         <a href="https://travis-ci.org/ucsdmath/Pagination">
         <img src="https://travis-ci.org/ucsdmath/Pagination.svg?branch=master" style="float: left; margin: 0px 0px 10px 10px;"></a><br>
         <a href="https://www.codacy.com/app/ucsdmath-project/Pagination">
-        <img src="https://api.codacy.com/project/badge/Grade/712cf72f522447e88528886b9d02448c"></a></td>
+        <img src="https://api.codacy.com/project/badge/Grade/712cf72f522447e88528886b9d02448c"></a>
+
+        <a href="https://scrutinizer-ci.com/g/ucsdmath/Pagination/?branch=master">
+        <img src="https://img.shields.io/scrutinizer/g/ucsdmath/Pagination.svg"></a>
+
+    </td>
     <td width="250" align="center">
         <a href="https://insight.sensiolabs.com/projects/4697add0-76b8-48d1-98bb-aa24eb472d5c">
         <img src="https://insight.sensiolabs.com/projects/4697add0-76b8-48d1-98bb-aa24eb472d5c/big.png" style="float: right; margin: 0px 0px 10px 10px;" width="212" height="51"></a></td>

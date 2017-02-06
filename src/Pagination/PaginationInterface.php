@@ -43,7 +43,7 @@ interface PaginationInterface
      * @var string NAVIGATION_ARROW_NEXT      The default next arrow navigation
      * @var string NAVIGATION_ELLIPSES        The default ellipses in navigation
      */
-    const FRAMEWORK_MINIMUM_PHP      = '7.0.0';
+    const FRAMEWORK_MINIMUM_PHP      = '7.1.0';
     const DEFAULT_CHARSET            = 'UTF-8';
     const CRLF                       = "\r\n";
     const REQUIRE_HTTPS              = true;

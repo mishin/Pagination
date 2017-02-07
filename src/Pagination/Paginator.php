@@ -337,7 +337,7 @@ class Paginator extends AbstractPaginationOperations implements PaginationInterf
                 $pages[] = $this->createPage($i, $i === (int) $this->currentPageNumber);
             }
         } else {
-            list($slidingStart, $slidingEnd) = $this->getAsArraySlidingRange();
+            [$slidingStart, $slidingEnd] = $this->getAsArraySlidingRange();
             $pages = $this->getAsArrayListingPages($slidingStart, $slidingEnd);
         }
 

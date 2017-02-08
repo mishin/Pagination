@@ -65,7 +65,7 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
  * (+) string __toString();
  * (+) string getUrlPattern();
  * (+) string getPageUrl($pageNumber);
- * (+) mixed __call($callback, $parameters);
+ * (+) mixed __call(string $callback, array $parameters);
  * (+) PaginationInterface recalculate(array $pageSettings);
  * (+) PaginationInterface setUrlPattern(string $urlPattern);
  * (+) PaginationInterface setMaxPagesToShow(int $maxPagesToShow);
@@ -302,7 +302,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function __call($callback, $parameters)
+    public function __call(string $callback, array $parameters)
     {
         return call_user_func_array($this->$callback, $parameters);
     }
@@ -540,10 +540,10 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * (+) bool isValidUuid(string $uuid);
      * (+) bool isValidEmail(string $email);
      * (+) bool isValidSHA512(string $hash);
-     * (+) mixed __call($callback, $parameters);
-     * (+) bool doesFunctionExist($functionName);
      * (+) bool isStringKey(string $str, array $keys);
+     * (+) bool doesFunctionExist(string $functionName);
      * (+) mixed get(string $key, string $subkey = null);
+     * (+) mixed __call(string $callback, array $parameters);
      * (+) mixed getProperty(string $name, string $key = null);
      * (+) object set(string $key, $value, string $subkey = null);
      * (+) object setProperty(string $name, $value, string $key = null);

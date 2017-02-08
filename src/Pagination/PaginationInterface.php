@@ -43,21 +43,21 @@ interface PaginationInterface
      * @var string NAVIGATION_ARROW_NEXT      The default next arrow navigation
      * @var string NAVIGATION_ELLIPSES        The default ellipses in navigation
      */
-    const FRAMEWORK_MINIMUM_PHP      = '7.1.0';
-    const DEFAULT_CHARSET            = 'UTF-8';
-    const CRLF                       = "\r\n";
-    const REQUIRE_HTTPS              = true;
-    const DEFAULT_TIMEZONE           = 'America/Los_Angeles';
-    const BASE_PAGE                  = 1;
-    const PLACEHOLDER_PAGE_NUMBER    = '(:pageNumber)';
-    const PLACEHOLDER_ITEMS_PER_PAGE = '(:itemsPerPage)';
-    const PLACEHOLDER_SORT_PATTERN   = '(:sortPattern)';
-    const PLACEHOLDER_SEARCH_PATTERN = '(:searchPattern)';
-    const TITLE_PREV                 = 'Select the next page';
-    const TITLE_NEXT                 = 'Select the previous page';
-    const NAVIGATION_ARROW_PREV      = '&#10094;&#160;Prev';
-    const NAVIGATION_ARROW_NEXT      = 'Next&#160;&#10095;';
-    const NAVIGATION_ELLIPSES        = '&#183;&#160;&#183;&#160;&#183;';
+    public const FRAMEWORK_MINIMUM_PHP      = '7.1.0';
+    public const DEFAULT_CHARSET            = 'UTF-8';
+    public const CRLF                       = "\r\n";
+    public const REQUIRE_HTTPS              = true;
+    public const DEFAULT_TIMEZONE           = 'America/Los_Angeles';
+    public const BASE_PAGE                  = 1;
+    public const PLACEHOLDER_PAGE_NUMBER    = '(:pageNumber)';
+    public const PLACEHOLDER_ITEMS_PER_PAGE = '(:itemsPerPage)';
+    public const PLACEHOLDER_SORT_PATTERN   = '(:sortPattern)';
+    public const PLACEHOLDER_SEARCH_PATTERN = '(:searchPattern)';
+    public const TITLE_PREV                 = 'Select the next page';
+    public const TITLE_NEXT                 = 'Select the previous page';
+    public const NAVIGATION_ARROW_PREV      = '&#10094;&#160;Prev';
+    public const NAVIGATION_ARROW_NEXT      = 'Next&#160;&#10095;';
+    public const NAVIGATION_ELLIPSES        = '&#183;&#160;&#183;&#160;&#183;';
 
     //--------------------------------------------------------------------------
 

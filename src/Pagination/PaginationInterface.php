@@ -64,7 +64,7 @@ interface PaginationInterface
     /**
      * Recalculates any updated settings parameter.
      *
-     * @param array $settings The list of per page settings.
+     * @param iterable $settings The list of per page settings.
      *
      * @return PaginationInterface The current interface
      *
@@ -72,7 +72,7 @@ interface PaginationInterface
      *
      * @api
      */
-    public function recalculate(array $settings): PaginationInterface;
+    public function recalculate(iterable $settings): PaginationInterface;
 
     //--------------------------------------------------------------------------
 

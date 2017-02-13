@@ -16,14 +16,14 @@
         "php": ">=7.1",
         "twig/twig": "2.1.0",
         "twig/extensions": "1.4.1",
-        "ucsdmath/functions": "1.14.x-dev"
+        "ucsdmath/functions": "1.14.0"
     },
     "require-dev": {
         "symfony/debug": "3.2.3",
         "mockery/mockery": "0.9.8",
         "phpunit/phpunit": "6.0.6",
         "fzaninotto/faker": "1.6.0",
-        "ucsdmath/date": "1.14.x-dev",
+        "ucsdmath/date": "1.14.0",
         "symfony/var-dumper": "3.2.3",
         "squizlabs/php_codesniffer": "2.8.0"
     },

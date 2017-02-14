@@ -48,7 +48,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
      *
      * @api
      */
-    public const VERSION = '1.14.0';
+    public const VERSION = '1.15.0';
 
     //--------------------------------------------------------------------------
 

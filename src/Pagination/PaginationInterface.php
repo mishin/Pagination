@@ -247,44 +247,44 @@ interface PaginationInterface
     /**
      * Get the next page number.
      *
-     * @return int
+     * @return null|int
      *
      * @api
      */
-    public function getNextPage();
+    public function getNextPage(): ?int;
 
     //--------------------------------------------------------------------------
 
     /**
      * Get the previous page number.
      *
-     * @return int
+     * @return null|int
      *
      * @api
      */
-    public function getPrevPage();
+    public function getPrevPage(): ?int;
 
     //--------------------------------------------------------------------------
 
     /**
      * Get the next page url.
      *
-     * @return string|null
+     * @return null|string
      *
      * @api
      */
-    public function getNextUrl();
+    public function getNextUrl(): ?string;
 
     //--------------------------------------------------------------------------
 
     /**
      * Get the previous page url.
      *
-     * @return string|null
+     * @return null|string
      *
      * @api
      */
-    public function getPrevUrl();
+    public function getPrevUrl(): ?string;
 
     //--------------------------------------------------------------------------
 
@@ -338,22 +338,22 @@ interface PaginationInterface
     /**
      * Get the next page number.
      *
-     * @return int
+     * @return null|int
      *
      * @api
      */
-    public function getCurrentPageFirstItem();
+    public function getCurrentPageFirstItem(): ?int;
 
     //--------------------------------------------------------------------------
 
     /**
      * Get the last item for the current page.
      *
-     * @return int
+     * @return null|int
      *
      * @api
      */
-    public function getCurrentPageLastItem();
+    public function getCurrentPageLastItem(): ?int;
 
     //--------------------------------------------------------------------------
 }

@@ -528,15 +528,15 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * Method list: (+) @api, (-) protected or private visibility.
      *
-     * (+) array all();
+     * (+) iterable all();
      * (+) object init();
      * (+) string version();
      * (+) bool isString($str);
      * (+) bool has(string $key);
      * (+) string getClassName();
      * (+) int getInstanceCount();
-     * (+) array getClassInterfaces();
      * (+) mixed getConst(string $key);
+     * (+) iterable getClassInterfaces();
      * (+) bool isValidUuid(string $uuid);
      * (+) bool isValidEmail(string $email);
      * (+) bool isValidSHA512(string $hash);

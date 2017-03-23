@@ -96,11 +96,11 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Get the next page number.
      *
-     * @return int|null
+     * @return null|int
      *
      * @api
      */
-    public function getCurrentPageFirstItem()
+    public function getCurrentPageFirstItem(): ?int
     {
         $first = ((int) $this->currentPageNumber - 1) * (int) $this->itemsPerPage + 1;
 
@@ -112,7 +112,7 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Get the last item for the current page.
      *
-     * @return int
+     * @return null|int
      *
      * @api
      */
@@ -260,11 +260,11 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Get the next page number.
      *
-     * @return int|null
+     * @return null|int
      *
      * @api
      */
-    public function getNextPage()
+    public function getNextPage(): ?int
     {
         return (int) $this->currentPageNumber < $this->pageCount ? (int) $this->currentPageNumber + 1 : null;
     }
@@ -274,11 +274,11 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Get the previous page number.
      *
-     * @return int|null
+     * @return null|int
      *
      * @api
      */
-    public function getPrevPage()
+    public function getPrevPage(): ?int
     {
         return (int) $this->currentPageNumber > 1 ? (int) $this->currentPageNumber - 1 : null;
     }
@@ -288,11 +288,11 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Get the next page url.
      *
-     * @return string|null
+     * @return null|string
      *
      * @api
      */
-    public function getNextUrl()
+    public function getNextUrl(): ?string
     {
         return $this->getNextPage() ? $this->getPageUrl($this->getNextPage()) : null;
     }
@@ -302,11 +302,11 @@ abstract class AbstractPaginationOperations extends AbstractPagination
     /**
      * Get the previous page url.
      *
-     * @return string|null
+     * @return null|string
      *
      * @api
      */
-    public function getPrevUrl()
+    public function getPrevUrl(): ?string
     {
         return $this->getPrevPage() ? $this->getPageUrl($this->getPrevPage()) : null;
     }

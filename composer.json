@@ -15,7 +15,7 @@
     "require": {
         "php": ">=7.1",
         "twig/twig": "2.4.3",
-        "twig/extensions": "1.5.0",
+        "twig/extensions": "1.5.1",
         "ucsdmath/functions": "1.21.x-dev"
     },
     "require-dev": {

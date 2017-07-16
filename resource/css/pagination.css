@@ -13,25 +13,20 @@
  * @version 1.21.0
  * @date    2017-06-03
  */
-
 .paging-container {
     width: 345px;
     float: left;
     margin: 0;
     padding: 0;
 }
-
 .paging-container-no-show-records {
     width: 230px;
     float: left;
     margin: 0;
     padding: 0;
 }
-
 .fl { float: left }
-
 .no-pe { pointer-events: none }
-
 .paging-select {
     width: 90px;
     float: left;
@@ -40,7 +35,6 @@
     -moz-appearance: none;
     appearance: none;
 }
-
 #paginator-items-per-page {
     width: 40px;
     font-size: 16px;
@@ -51,7 +45,6 @@
     padding: 3px;
     margin: 2px 2px 2px 1px;
 }
-
 #button-pagination-show {
     float: left;
     margin: 4px 4px 4px 8px;

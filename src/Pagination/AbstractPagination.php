@@ -65,11 +65,11 @@ use UCSDMath\Functions\ServiceFunctionsInterface;
  * (+) string __toString();
  * (+) string getUrlPattern();
  * (+) string getPageUrl($pageNumber);
- * (+) mixed __call(string $callback, iterable $parameters);
- * (+) PaginationInterface recalculate(iterable $pageSettings);
+ * (+) mixed __call(string $callback, array $parameters);
+ * (+) PaginationInterface recalculate(array $pageSettings);
  * (+) PaginationInterface setUrlPattern(string $urlPattern);
  * (+) PaginationInterface setMaxPagesToShow(int $maxPagesToShow);
- * (+) PaginationInterface loadStartupSettings(iterable $pageSettings);
+ * (+) PaginationInterface loadStartupSettings(array $pageSettings);
  * (+) PaginationInterface setRenderAsJson(\Closure $renderAsJson);
  * (+) PaginationInterface setLimitPerPageOffset(\Closure $limitPerPageOffset);
  * (+) array getLimitPerPageOffset(\Closure $overridePerPageOffset = null, int $newPage = null);
@@ -152,11 +152,11 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *    $this->maxPagesToShow can never be < 3
      *    $this->currentPageNumber can never be < 1
      *
-     * @param iterable $pageSettings The list of page settings.
+     * @param array $pageSettings The list of page settings.
      *
      * @api
      */
-    public function __construct(iterable $pageSettings)
+    public function __construct(array $pageSettings)
     {
         $this->loadStartupSettings($pageSettings);
         /* Callback to {$limitPerPageOffset} for Page Override. */
@@ -185,13 +185,13 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *    'isSearchPatternUsed' => (bool) false
      *    'isSortPatternUsed'   => (bool) false
      *
-     * @param iterable $pageSettings The startup configuration setting.
+     * @param array $pageSettings The startup configuration setting.
      *
      * @return PaginationInterface The current instance
      *
      * @api
      */
-    public function loadStartupSettings(iterable $pageSettings): PaginationInterface
+    public function loadStartupSettings(array $pageSettings): PaginationInterface
     {
         foreach ($pageSettings as $key => $value) {
             if (property_exists($this, $key)) {
@@ -295,14 +295,14 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * Forward to any callable, including anonymous functions
      * (or any instances of \Closure).
      *
-     * @param string   $callback   The named callable to be called.
-     * @param iterable $parameters The parameter set to be passed to the callback (as an indexed array).
+     * @param string $callback   The named callable to be called.
+     * @param array  $parameters The parameter set to be passed to the callback (as an indexed array).
      *
      * @return mixed  the return value of the callback, or false on error.
      *
      * @api
      */
-    public function __call(string $callback, iterable $parameters)
+    public function __call(string $callback, array $parameters)
     {
         return call_user_func_array($this->$callback, $parameters);
     }
@@ -317,7 +317,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *    $this->maxPagesToShow can never be < 3
      *    $this->currentPageNumber can never be < 1
      *
-     * @param iterable $pageSettings The list of per page settings.
+     * @param array $pageSettings The list of per page settings.
      *
      * @return PaginationInterface The current instance
      *
@@ -325,7 +325,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * @api
      */
-    public function recalculate(iterable $pageSettings): PaginationInterface
+    public function recalculate(array $pageSettings): PaginationInterface
     {
         $this->limitPerPageOffset instanceof \Closure
             ?: $this->throwExceptionError([__METHOD__, __CLASS__, 'LimitPerPageOffset callback not found, set it using Paginator::setLimitPerPageOffset()', 'A105']);
@@ -528,7 +528,7 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      *
      * Method list: (+) @api, (-) protected or private visibility.
      *
-     * (+) iterable all();
+     * (+) array all();
      * (+) object init();
      * (+) string version();
      * (+) bool isString($str);
@@ -536,19 +536,19 @@ abstract class AbstractPagination implements PaginationInterface, ServiceFunctio
      * (+) string getClassName();
      * (+) int getInstanceCount();
      * (+) mixed getConst(string $key);
-     * (+) iterable getClassInterfaces();
+     * (+) array getClassInterfaces();
      * (+) bool isValidUuid(string $uuid);
      * (+) bool isValidEmail(string $email);
      * (+) bool isValidSHA512(string $hash);
      * (+) bool doesFunctionExist(string $functionName);
-     * (+) bool isStringKey(string $str, iterable $keys);
+     * (+) bool isStringKey(string $str, array $keys);
      * (+) mixed get(string $key, string $subkey = null);
      * (+) mixed getProperty(string $name, string $key = null);
-     * (+) mixed __call(string $callback, iterable $parameters);
+     * (+) mixed __call(string $callback, array $parameters);
      * (+) object set(string $key, $value, string $subkey = null);
      * (+) object setProperty(string $name, $value, string $key = null);
-     * (-) Exception throwExceptionError(iterable $error);
-     * (-) InvalidArgumentException throwInvalidArgumentExceptionError(iterable $error);
+     * (-) Exception throwExceptionError(array $error);
+     * (-) InvalidArgumentException throwInvalidArgumentExceptionError(array $error);
      */
     use ServiceFunctions;
 
